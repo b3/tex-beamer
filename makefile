@@ -1,6 +1,6 @@
 IMG-SVG := $(wildcard img/*.svg)
 IMG-PDF := $(addsuffix .pdf,$(basename $(IMG-SVG)))
-IMG-PNG := $(wildcard img/*.png)
+IMG-PNG := $(addsuffix .png,$(basename $(IMG-SVG)))
 IMG-JPG := $(wildcard img/*.jpg)
 
 all: help
