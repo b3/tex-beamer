@@ -1,0 +1,138 @@
+% Un thème Beamer pour des présentations génériques par Bruno BEAUFILS
+% Copyright (C) 2016-2017 Bruno BEAUFILS
+% This file is distributed under the terms of the WTFPL license.
+
+\def\filedate{2017/09/29}
+
+% Paramétrages génériques %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Des "jolies" polices de caractères
+\usepackage{lmodern}            % pour sf et tt
+\usepackage{fourier}            % pour rm
+\usepackage{bbm}                % pour les mathbbm
+
+%% Paramétrage hyperref
+\hypersetup{%
+  colorlinks,%
+  linkcolor=,%
+  urlcolor=blue}                % liens en bleu
+
+% Paramétrage Beamer %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\mode<presentation>             % pour le mode présentation seulement
+
+%% Couleurs
+\usecolortheme{orchid}
+\setbeamercolor{alerted text}{fg=black}
+
+%% Polices de caractères
+\usefonttheme[stillsansseriflarge]{serif}
+\usefonttheme[onlylarge]{structurebold}
+\setbeamerfont{alerted text}{series=\bfseries}
+
+%% Traduction en français
+\uselanguage{french}
+\languagepath{french}
+\deftranslation[to=french]{Definition}{Définition}
+\deftranslation[to=french]{Example}{Exemple}
+\deftranslation[to=french]{Theorem}{Théorème}
+
+%% Adaptation des modèles
+
+%%% Page de titre
+\defbeamertemplate*{title page}{bdefault}[1][]
+{
+  \vbox{}
+  \vfill
+  \begin{centering}
+    \begin{beamercolorbox}[sep=8pt,center,#1]{title}
+      \usebeamerfont{title}\inserttitle\par%
+      \ifx\insertsubtitle\@empty%
+      \else%
+        \vskip0.25em%
+        {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}%
+      \fi%     
+    \end{beamercolorbox}%
+    \vskip1em\par
+    \begin{beamercolorbox}[sep=8pt,center,#1]{author}
+      \usebeamerfont{author}\insertauthor
+    \end{beamercolorbox}
+    \begin{beamercolorbox}[sep=8pt,center,#1]{institute}
+      \usebeamerfont{institute}\insertinstitute
+    \end{beamercolorbox}
+    \begin{beamercolorbox}[sep=8pt,center,#1]{date}
+      \usebeamerfont{date}\insertdate
+    \end{beamercolorbox}\vskip0.5em
+    {\usebeamercolor[fg]{titlegraphic}\inserttitlegraphic\par}
+  \end{centering}
+  \vfill
+%  \begin{beamercolorbox}[sep=8pt,wd=\linewidth,#1]{license}
+%    \usebeamerfont{license}\insertlicense
+%  \end{beamercolorbox}\vskip0.5em
+}
+\setbeamertemplate{title page}[bdefault]
+\let\bmaketitle\maketitle
+\renewcommand{\maketitle}{%
+  {\setbeamertemplate{footline}{}\addtocounter{framenumber}{-1}\bmaketitle}}
+
+%%% Sections dans la table des matières
+\setbeamertemplate{sections/subsections in toc}[sections numbered]
+
+%%% Une page simple devant chaque partie
+\AtBeginPart{\frame{\partpage}}
+\setbeamertemplate{part page}%
+{
+  \begin{center}
+    \usebeamerfont{frametitle}\usebeamercolor[fg]{frametitle}\insertpart
+  \end{center}
+}
+
+%% Une page simple (avec table des matières) devant chaque section
+\setbeamertemplate{section page}%
+{
+  \tableofcontents[currentsection]
+}
+\AtBeginSection[]{\frame{\sectionpage}}
+
+%% Une page simple (avec table des matières) devant chaque sous-section
+\setbeamertemplate{subsection page}%
+{
+  \tableofcontents[currentsubsection]
+}
+\AtBeginSubsection[]{\frame{\subsectionpage}}
+
+%%% Styles des blocs
+\setbeamertemplate{blocks}[rounded][shadow=true]
+\setbeamerfont{block title}{size={}}
+
+%%% Style des listes
+\setbeamertemplate{items}[ball]
+
+%%% Des pieds de diapo simples
+\setbeamertemplate{footline}
+{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=\paperwidth,ht=2.25ex,dp=1ex]{frametitle}
+    \usebeamerfont{date in head/foot}
+    \hspace*{2ex}
+    \textbf{\insertshorttitle} \hspace*{3ex} \emph{\textmd{\insertsection}} 
+    \hfill
+    \insertframenumber{} / \inserttotalframenumber\hspace*{2ex}
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+\setbeamertemplate{navigation symbols}{} % pas de navigation affichée
+
+%% D'autres paramètres Beamer en vrac
+
+%%% On découvre lentement les trucs cachés
+\setbeamercovered{dynamic}
+
+%%% Marges
+\setbeamersize{text margin left=1em,text margin right=1em}
+
+% Local Variables:
+% time-stamp-active: t 
+% time-stamp-pattern: "5/\\filedate{%:y/%02m/%02d}$"
+% End:

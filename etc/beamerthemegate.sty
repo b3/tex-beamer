@@ -1,0 +1,80 @@
+% Un thème Beamer pour le GATE
+
+% Paramétrages génériques %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Les couleurs du GATE
+\definecolor{GateBleuFonce}{RGB}{1,28,71}    % en HTML : 011c47
+\definecolor{GateBleuClair}{RGB}{48,131,181} % en HTML : 3083b5
+
+%% Paramétrage hyperref
+\hypersetup{%
+  colorlinks,%
+  linkcolor=,%
+  urlcolor=GateBleuClair}
+  
+% Paramétrage Beamer %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\mode<presentation>             % pour le mode présentation seulement
+
+%% Logos
+\titlegraphic{\includegraphics[width=10em]{logo-gate}}
+\logo{\includegraphics[height=.75cm]{logo-gate}}
+
+%% Couleurs
+\usecolortheme{orchid}
+\setbeamercolor{normal text}{fg=GateBleuFonce}
+\setbeamercolor{structure}{fg=GateBleuFonce}
+\setbeamercolor{frametitle}{fg=white,bg=GateBleuClair}
+\setbeamercolor{subtitle}{fg=GateBleuClair}
+\setbeamercolor{footline}{bg=GateBleuFonce,fg=white}
+\setbeamercolor{block title}{bg=GateBleuClair}
+
+%% Polices de caractères
+%\usefonttheme[stillsansseriftext]{serif}
+\usefonttheme[onlylarge]{structurebold}
+\setbeamerfont{date in head/foot}{series=\bfseries}
+\setbeamerfont{date}{series=\bfseries}
+\setbeamerfont{alerted text}{series=\bfseries}
+
+%% Traduction en français
+\uselanguage{french}
+\languagepath{french}
+\deftranslation[to=french]{Definition}{Définition}
+\deftranslation[to=french]{Example}{Exemple}
+\deftranslation[to=french]{theorem}{théorème}
+
+%% Adaptation des modèles
+
+%%% Sections dans la table des matières
+\setbeamertemplate{sections/subsections in toc}[sections numbered]
+
+%%% Styles des blocs
+\setbeamertemplate{blocks}[rounded][shadow=true]
+\setbeamerfont{block title}{size={}}
+
+%%% Style des listes
+\setbeamertemplate{items}[triangle]
+
+%%% Type des continuations
+\setbeamertemplate{frametitle continuation}[from second][(suite)]
+
+%%% Des pieds de diapo simples
+\setbeamertemplate{footline}
+{
+  \leavevmode%
+  \hbox{%
+    \begin{beamercolorbox}[wd=\paperwidth,ht=3ex,dp=1.5ex]{footline}
+      \usebeamerfont{date in head/foot}
+      \hspace*{1ex}\insertlogo
+      \hfill
+      \insertframenumber{} / \inserttotalframenumber\hspace*{2ex}
+    \end{beamercolorbox}}%
+  \vskip0pt%
+}
+\setbeamertemplate{navigation symbols}{} % pas de navigation affichée
+\setbeamertemplate{sidebar right}{}      % pas de logo
+
+%% D'autres paramètres Beamer en vrac
+\setbeamercovered{dynamic}      % on découvre lentement les trucs cachés
+\setbeamersize{text margin left=1em,text margin right=1em}
+

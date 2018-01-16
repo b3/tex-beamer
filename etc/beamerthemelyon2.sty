@@ -1,32 +1,31 @@
-% Un thème Beamer pour l'Université de Lille 1
+% Un thème Beamer pour l'Université de Lyon 2
 % Copyright (C) 2015-2016 Bruno BEAUFILS
 % This file is distributed under the terms of the WTFPL license.
 
+\def\filedate{2016/02/01}
+
 % Paramétrages génériques %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%% Les couleurs de Lille 1
-\definecolor{Lille1Pourpre}{RGB}{174,37,115}      % en HTML : ae2573
-\definecolor{Lille1NeutreNoir}{RGB}{56,47,45}     % en HTML : 382f2d
-\definecolor{Lille1NeutreBleu}{RGB}{127,160,172}  % en HTML : 7fa0ac
-\definecolor{Lille1NeutreRose}{RGB}{216,200,209}  % en HTML : d8c8d1
-\definecolor{Lille1FroideBleu}{RGB}{29,66,138}    % en HTML : 1d428a
-\definecolor{Lille1FroideVert}{RGB}{0,179,152}    % en HTML : 00b398
-\definecolor{Lille1FroideCyan}{RGB}{141,200,232}  % en HTML : 8dc8e8
-\definecolor{Lille1ChaudeViolet}{RGB}{114,0,98}   % en HTML : 720062
-\definecolor{Lille1ChaudeMarron}{RGB}{211,130,53} % en HTML : d38235
-\definecolor{Lille1ChaudeTaupe}{RGB}{213,203,159} % en HTML : d5cb9f
-\definecolor{Lille1ViveRouge}{RGB}{249,66,58}     % en HTML : f9423a
-\definecolor{Lille1ViveVert}{RGB}{120,190,32}     % en HTML : 78be20
-\definecolor{Lille1ViveJaune}{RGB}{252,227,0}     % en HTML : fce300
+%% Les couleurs de Lyon 2
+\definecolor{Lyon2Vert}{RGB}{104,183,79}          % en HTML : 7db956
+\definecolor{Lyon2GrisClair}{cmyk}{0,0,0,0.07}    % en HTML : ededed
+\definecolor{Lyon2GrisFonce}{gray}{0.3}           % en HTML : b2b2b2
+\definecolor{Lyon2Formation}{RGB}{167,36,133}     % en HTML : bd2e86
+\definecolor{Lyon2Campus}{RGB}{232,91,108}        % en HTML : e85b6c
+\definecolor{Lyon2Recherche}{RGB}{65,153,217}     % en HTML : 0099cc
+\definecolor{Lyon2International}{RGB}{66,182,185} % en HTML : 55c1bf
+\definecolor{Lyon2Documentation}{RGB}{236,136,0}  % en HTML : ec8800
+\definecolor{Lyon2Personnels}{RGB}{81,76,76}      % en HTML : 635e5a
+\definecolor{Lyon2Pro}{RGB}{14,85,60}             % en HTML : 00664e
 
-%% La police Lille 1 n'est pas libre (Verdana) on prend le truc le plus proche
+%% Les polices Lyon 2
 \usepackage[scaled=.92]{helvet}
 
 %% Paramétrage hyperref
 \hypersetup{%
   colorlinks,%
   linkcolor=,%
-  urlcolor=Lille1Pourpre}
+  urlcolor=Lyon2Vert}
   
 % Paramétrage Beamer %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -34,26 +33,24 @@
 
 %% Logos
 \titlegraphic{%
-  \raisebox{-0.5\height}{\includegraphics[width=6em]{logo-univ-lille1}}
+  \raisebox{-0.5\height}{\includegraphics[width=6em]{logo-univ-lyon2}}
 }
-\logo{\includegraphics[height=1.5em]{logo-univ-lille1}}
+\logo{\includegraphics[height=.5cm]{logo-univ-lyon2}}
 
 %% Couleurs
 \usecolortheme{spruce}
-\setbeamercolor{normal text}{fg=Lille1NeutreNoir}
-\setbeamercolor{structure}{fg=black}
-\setbeamercolor{frametitle}{fg=white,bg=Lille1Pourpre}
-\setbeamercolor{title}{fg=Lille1Pourpre,bg=white}
-\setbeamercolor{subtitle}{fg=Lille1NeutreBleu}
-\setbeamercolor{footline}{fg=white,bg=Lille1Pourpre}
-\setbeamercolor{block title}{fg=white,bg=Lille1Pourpre}
-\setbeamercolor{block body}{fg=Lille1NeutreNoir,bg=Lille1NeutreRose}
-\setbeamercolor{block title example}{fg=white,bg=Lille1NeutreBleu}
-\setbeamercolor{block body example}{fg=Lille1NeutreNoir,bg=Lille1NeutreRose}
-\setbeamercolor{alerted text}{fg=Lille1Pourpre}
+\setbeamercolor{normal text}{fg=Lyon2GrisFonce}
+\setbeamercolor{structure}{fg=Lyon2GrisFonce}
+\setbeamercolor{frametitle}{fg=Lyon2Vert,bg=Lyon2GrisClair}
+\setbeamercolor{title}{fg=Lyon2GrisFonce,bg=white}
+\setbeamercolor{subtitle}{fg=Lyon2Vert}
+\setbeamercolor{footline}{bg=Lyon2Vert,fg=Lyon2GrisClair}
+\setbeamercolor{block title}{bg=Lyon2Vert,fg=Lyon2GrisClair}
+\setbeamercolor{block body}{bg=Lyon2GrisClair,fg=Lyon2GrisFonce}
+\setbeamercolor{alerted text}{fg=Lyon2Vert}
 
 %% Polices de caractères
-%\usefonttheme[stillsansseriftext]{serif}
+\usefonttheme[stillsansseriflarge]{serif}
 \usefonttheme[onlylarge]{structurebold}
 \setbeamerfont{date in head/foot}{series=\bfseries}
 \setbeamerfont{date}{series=\bfseries}
@@ -80,7 +77,7 @@
 \setbeamerfont{block title}{size={}}
 
 %%% Style des listes
-\setbeamertemplate{items}[triangle]
+\setbeamertemplate{items}[triangle] % ou ball
 
 %%% Type des continuations
 \setbeamertemplate{frametitle continuation}[from second][(suite)]
@@ -94,16 +91,23 @@
       \usebeamerfont{date in head/foot}
       \hspace*{1.25ex}
       \inserttitle{} \hspace*{3ex} \emph{\textmd{\insertsection}}
-      \hfill
+      \hfill\hfill
       \insertframenumber{} / \inserttotalframenumber
+      \hspace*{1ex}
+      \insertlogo
       \hspace*{1.25ex}
-      \llap{\raisebox{2em}{\insertlogo}\hspace{.75ex}}
     \end{beamercolorbox}}%
   \vskip0pt%
 }
 \setbeamertemplate{navigation symbols}{} % pas de navigation affichée
 \setbeamertemplate{sidebar right}{}      % pas de logo
 
+
 %% D'autres paramètres Beamer en vrac
 \setbeamercovered{dynamic}      % on découvre lentement les trucs cachés
 \setbeamersize{text margin left=1em,text margin right=1em}
+
+% Local Variables:
+% time-stamp-active: t 
+% time-stamp-pattern: "2/\\filedate{%:y/%02m/%02d}$"
+% End:
