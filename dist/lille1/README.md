@@ -10,7 +10,7 @@ faciliter la production de support de présentation (*Powerpoint* en novlangue)
 avec un rendu simple mais spécifique.
 
 Pour ceux qui connaissent bien [LaTeX](http://www.latex-project.org) et la
-classe [Beamer](https://bitbucket.org/rivanvx/beamer/wiki/Home), les fichiers
+classe [Beamer](https://github.com/josephwright/beamer), les fichiers
 importants sont le thème Beamer
 [`beamerthemelille1.sty`](beamerthemelille1.sty) (`lille1`) et le logo
 vectoriel de l'Université de Lille 1
