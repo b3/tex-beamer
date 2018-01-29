@@ -1,5 +1,5 @@
 ---
-title: Documentation du script `md2beamer`
+title: md2beamer
 author:
 - Bruno BEAUFILS
 date: 16 mars 2017
@@ -20,14 +20,14 @@ date: 16 mars 2017
     1. créer un nouveau dossier
     2. y copier, renommer puis modifier le fichier `modele-presentation.md`
     3. créer la présentation via la commande
-  
-        md2beamer nom-du-fichier.md
+
+            md2beamer nom-du-fichier.md
   
     4. si le fichier inclus des images ajouter leur nom ou leur répertoire en fin de ligne
     
-        md2beamer nom-du-fichier.md image1.pdf image2.png
+            md2beamer nom-du-fichier.md image1.pdf image2.png
                               
-        md2beamer nom-du-fichier.md nom-du-repertoire-des-images
+            md2beamer nom-du-fichier.md nom-du-repertoire-des-images
 
 
 # Faire une présentation avec `md2beamer`
@@ -124,13 +124,12 @@ Elle est décrite en détails ailleurs (cf liens de cette diapo)
 
   ![TeX Friendly Zone](img/tex-friendly-zone.svg){ width=30% }
 
-- une diapo sans titre ni pied de page est possible
-    - le titre doit juste être `{.plain}`
-
 
 ## {.plain}
 
 ![Tux](img/tux.svg)
+
+Une diapo nommé `{.plain}` n'a pas de titre ni de pied de page
 
 
 ## Les tableaux avec `md2beamer`
