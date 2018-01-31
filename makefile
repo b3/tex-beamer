@@ -31,10 +31,10 @@ img/%.png: img/%.svg
 
 images: $(IMG-PDF) $(IMG-PNG)   ## génère les images PDF et PNG à partir des SVG
 
-modele-cours-%.tex: modele-cours.tex dist/%/*.tex 0*.tex
+modele-cours-%.tex: modele-cours.tex dist/%/*.tex 0*.tex etc/*
 	bin/include -p "% include " -I dist/$* $< > $@
 
-modele-presentation-%.tex: modele-presentation.tex dist/%/*.tex
+modele-presentation-%.tex: modele-presentation.tex dist/%/*.tex etc/*
 	bin/include -p "% include " -I dist/$* $< > $@
 
 ##############################################################################
