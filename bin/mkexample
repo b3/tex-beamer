@@ -1,0 +1,94 @@
+#!/bin/bash
+# Prépare un ensemble de fichiers exemples à distribuer pour un thème beamer
+#
+# usage: mkexample [OPTIONS] THEME DESTINATION MODELE...
+#
+# Adapte des modèles de fichiers pour un thème spécifique :
+#
+# - les fichiers MODELE sont transformés en remplaçant chaque ligne contenant
+#   une occurence d'un mot entouré par des @ par le contenu d'un fichier de
+#   même nom qui est cherché dans le répertoire ./dist/THEME ;
+#
+# - les modèles adaptés sont placés dans DESTINATION en y incluant l'ensemble
+#   des fichiers présents dans le fichier MANIFEST s'il existe plus le thème
+#   Beamer associé (qui est cherché dans ./etc.).
+#
+# OPTIONS
+#     -m, --manifest FILE  utilise FILE plutôt que MANIFEST
+#     -h, --help           affiche ce message d'aide
+
+# Copyright (C) 2018 Bruno BEAUFILS <bruno@boulgour.com>
+#
+# This software comes with ABSOLUTELY NO WARRANTY.
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License as
+# published by the Free Software Foundation in its version 2.
+# See the README or COPYING file for details.
+
+# FreeBSD et GNU n'ont pas la même option pour activer les ERE dans sed
+# FIXME: ne marche pas si le sed disponible est strictement POSIX (aka ni GNU, ni FreeBSD)
+if sed v </dev/null >/dev/null 2>&1 ; then # 'v' est spécifique à GNU sed
+    _sed() { sed -r "$@" ; }    # GNU
+else
+    _sed() { sed -E "$@" ; }    # (FreeBSD)
+fi
+
+doc () { sed -n '2,/^$/ { s/^ *#// ; s/^ //g ; t e ; d ; :e p }' <$0 ; }
+
+die () { echo "${0##*/}: error: $*" 1>&2 ; exit 1 ; }
+
+MANIFEST=MANIFEST
+
+# gestion options
+while test "$(echo $1 | cut -c 1)"  = "-" 
+do
+    case "$1" in
+        "-h"|"--help")
+            doc
+            exit 0
+            ;;
+        "-m"|"--manifest")
+            shift
+            [ -z "$1" ] && die "manifeste manquant"
+            MANIFEST="$1"
+            ;;
+        *)
+            die "option inconnue: $1"
+            break ;;
+    esac
+    shift
+done
+
+# les paramètres
+[ -z "$1" ] && die "theme manquant"
+THEME="$1"
+shift
+
+[ -z "$1" ] && die "destination manquante"
+[ -d "$1" ] || die "destination inaccessible: $1"
+DESTINATION="$1"
+shift
+
+# le thème
+BEAMER="etc/beamertheme$THEME.sty"
+[ -r "$BEAMER" ] || die "thème Beamer inaccessible: $BEAMER"
+cp "$BEAMER" "$DESTINATION"
+
+# les modèles
+for m in "$@"
+do
+    [ -r "$m" ] || die "modèle inaccessible: $m"
+    # les parties
+    for p in $(_sed -n '/@[^@]+@/ { s/^[^@]*@// ; s/@[^@]*$// ; p }' "$m")
+    do
+        fp="dist/$THEME/$p"
+        [ -r $fp ] || die "partie inacessible: $fp"
+        cmd="$cmd -e '/@$p@/ r $fp' -e '/@$p@/ d'"
+    done
+    eval _sed $cmd "$m" >"$DESTINATION/$m"
+done
+
+# les autres fichiers
+if [ -r "$MANIFEST" ] ; then
+    cp $(cat "$MANIFEST") "$DESTINATION"
+fi
