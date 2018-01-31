@@ -75,6 +75,9 @@
 
 %% Adaptation des modèles
 
+%%% La page de titre
+\renewcommand{\maketitle}[1][]{\addtocounter{framenumber}{-1}\frame[plain,#1]{\titlepage}}
+
 %%% Sections dans la table des matières
 \setbeamertemplate{sections/subsections in toc}[sections numbered]
 

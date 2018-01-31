@@ -54,6 +54,9 @@
 
 %% Adaptation des modèles
 
+%%% La page de titre
+\renewcommand{\maketitle}[1][]{\addtocounter{framenumber}{-1}\frame[plain,#1]{\titlepage}}
+
 %%% Sections dans la table des matières
 \setbeamertemplate{sections/subsections in toc}[sections numbered]
 
@@ -84,7 +87,11 @@
 \setbeamertemplate{sidebar right}{}      % pas de logo
 
 %% D'autres paramètres Beamer en vrac
-\setbeamercovered{dynamic}      % on découvre lentement les trucs cachés
+
+%%% On découvre lentement les trucs cachés
+\setbeamercovered{dynamic}      
+
+%%% Marges
 \setbeamersize{text margin left=1em,text margin right=1em}
 
 % Local Variables:
