@@ -1,0 +1,49 @@
+\documentclass[10pt,t]{beamer}
+
+\usepackage[french]{babel}
+\usepackage{type1ec}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+
+% include theme.tex
+
+% include simple-metadata.tex
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\maketitle
+
+\begin{frame}{Plan}
+  \tableofcontents 
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% [shrink] si on veut forcer à tenir sur une seul frame
+% [plain] si on ne veut pas de décoration
+% [fragile] s'il y du texte verbatim
+\begin{frame}{Introduction} 
+  \structure{Un exemple}
+
+  \begin{itemize}
+    % include simple-exemple.tex
+  \item Son contenu est un exemple pour comprendre comment
+
+    \begin{itemize}
+    \item composer avec \LaTeX{}
+    \item préparer une présentation avec Beamer
+    \end{itemize}
+
+  \end{itemize}
+
+  \pause
+
+  \structure{Un modèle}
+
+  % include simple-modele.tex
+\end{frame}
+
+\end{document}

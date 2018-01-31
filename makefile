@@ -1,10 +1,13 @@
+MODELES := modele-cours-gate.tex modele-cours-lille1.tex modele-cours-lyon2.tex
+MODELES += simple-lille1.tex
+MODELES += modele-presentation-gate.tex modele-presentation-lille1.tex
+
+PDF := $(addsuffix .pdf,$(basename $(MODELES))) modele-diaporama.pdf
+
 IMG-SVG := $(wildcard img/*.svg)
 IMG-PDF := $(addsuffix .pdf,$(basename $(IMG-SVG)))
 IMG-PNG := $(addsuffix .png,$(basename $(IMG-SVG)))
 IMG-JPG := $(wildcard img/*.jpg)
-MODELES := modele-cours-gate.tex modele-cours-lille1.tex modele-cours-lyon2.tex
-MODELES += modele-presentation-gate.tex modele-presentation-lille1.tex
-PDF := $(addsuffix .pdf,$(basename $(MODELES))) modele-diaporama.pdf
 
 # FreeBSD & GNU sed do not use the same option for ERE
 SED=sed$(shell { sed v </dev/null >/dev/null 2>&1 && echo " -r" ; } || echo " -E" ) 
@@ -32,6 +35,9 @@ img/%.png: img/%.svg
 images: $(IMG-PDF) $(IMG-PNG)   ## génère les images PDF et PNG à partir des SVG
 
 modele-cours-%.tex: modele-cours.tex dist/%/*.tex 0*.tex etc/*
+	bin/include -p "% include " -I dist/$* $< > $@
+
+simple-%.tex: simple.tex dist/%/*.tex 0*.tex etc/*
 	bin/include -p "% include " -I dist/$* $< > $@
 
 modele-presentation-%.tex: modele-presentation.tex dist/%/*.tex etc/*
