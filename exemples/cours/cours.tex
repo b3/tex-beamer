@@ -32,16 +32,12 @@
 \usepackage{pgfpages}           % pour les présentations en double-écran
 
 % Paramétrages Beamer %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\usetheme{lille1}
+@theme.tex@
 %\setbeameroption{show notes on second screen} % les notes sur le second écran
 
 % Méta-données du document %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\title{Un modèle de cours à Lille~1}
-\subtitle{Avec \LaTeX{} et Beamer}
-\author{Prénom NOM}
-\institute{Université Lille~1 \and IUT «A»}
-\date{2015/2016}
+@metadata.tex@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -66,8 +62,7 @@
   \structure{Un exemple}
 
   \begin{itemize}
-  \item Cette présentation est produite par \texttt{\textbf{modele-cours-lille1.tex}}
-  \item Elle est conçue pour des cours magistraux à Lille~1 pour des gens d'une composante
+  @exemple.tex@
   \item Son contenu est un exemple pour comprendre comment
 
     \begin{itemize}
@@ -81,22 +76,7 @@
 
   \structure{Un modèle}
 
-  \begin{itemize}
-  \item Elle constitue un modèle pour faire d'autres cours :
-    
-    \begin{enumerate}
-    \item créer un nouveau dossier ;
-    \item y copier les fichiers 
-
-      \begin{itemize}
-      \item \texttt{\textbf{beamerthemelille1.sty}}, qui est le thème Beamer pour Lille~1,
-      \item \texttt{\textbf{logo-univ-lille1.pdf}}, qui est le logo de Lille~1 utilisé,
-      \end{itemize}
-
-    \item y copier, renommer puis modifier le fichier \texttt{\textbf{modele-cours-lille1.tex}} ;
-    \item y compiler le fichier.
-    \end{enumerate}
-  \end{itemize}
+  @modele.tex@
 
   \pause
 
@@ -112,6 +92,8 @@
 
 \subsection{Des conseils de productions}
 \input{02-conseils}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Une petite référence}
 

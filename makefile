@@ -2,6 +2,7 @@ IMG-SVG := $(wildcard img/*.svg)
 IMG-PDF := $(addsuffix .pdf,$(basename $(IMG-SVG)))
 IMG-PNG := $(addsuffix .png,$(basename $(IMG-SVG)))
 IMG-JPG := $(wildcard img/*.jpg)
+EXEMPLES := $(shell bin/exemples -l)
 
 all: help
 
@@ -21,7 +22,7 @@ images: $(IMG-PDF) $(IMG-PNG)
 
 ##############################################################################
 
-.PHONY: check clean dist-clean
+.PHONY: check clean dist dist-clean
 
 check:
 	@which pdflatex
@@ -30,5 +31,8 @@ check:
 clean:
 	-rm $(shell find . -name "*~")
 
+dist: images
+	bin/exemples
+
 dist-clean: clean
-	-rm $(IMG-PDF) $(IMG-PNG)
+	-rm $(IMG-PDF) $(IMG-PNG) $(EXEMPLES)
