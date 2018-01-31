@@ -15,6 +15,7 @@
 #
 # OPTIONS
 #     -m, --manifest FILE  utilise FILE plutôt que MANIFEST
+#     -l, --list           liste les fichiers plutôt que de les créer
 #     -h, --help           affiche ce message d'aide
 
 # Copyright (C) 2018 Bruno BEAUFILS <bruno@boulgour.com>
@@ -40,6 +41,7 @@ die () { echo "${0##*/}: error: $*" 1>&2 ; exit 1 ; }
 MANIFEST=MANIFEST
 
 # gestion options
+creer=true
 while test "$(echo $1 | cut -c 1)"  = "-" 
 do
     case "$1" in
@@ -51,6 +53,9 @@ do
             shift
             [ -z "$1" ] && die "manifeste manquant"
             MANIFEST="$1"
+            ;;
+        "-l"|"--list")
+            creer=false
             ;;
         *)
             die "option inconnue: $1"
@@ -72,7 +77,11 @@ shift
 # le thème
 BEAMER="etc/beamertheme$THEME.sty"
 [ -r "$BEAMER" ] || die "thème Beamer inaccessible: $BEAMER"
-cp "$BEAMER" "$DESTINATION"
+if $creer ; then
+    cp "$BEAMER" "$DESTINATION"
+else
+    echo "$DESTINATION/beamer$THEME.sty"
+fi
 
 # les modèles
 for m in "$@"
@@ -85,10 +94,21 @@ do
         [ -r $fp ] || die "partie inacessible: $fp"
         cmd="$cmd -e '/@$p@/ r $fp' -e '/@$p@/ d'"
     done
-    eval _sed $cmd "$m" >"$DESTINATION/$m"
+    if $creer ; then
+        eval _sed $cmd "$m" > "$DESTINATION/$m"
+    else
+        echo "$DESTINATION/$m"
+    fi
 done
 
 # les autres fichiers
 if [ -r "$MANIFEST" ] ; then
-    cp $(cat "$MANIFEST") "$DESTINATION"
+    if $creer ; then
+        cp $(cat "$MANIFEST") "$DESTINATION"
+    else
+        for f in $(cat "$MANIFEST")
+        do
+            echo "$DESTINATION/$(basename $f)"
+        done
+    fi
 fi
