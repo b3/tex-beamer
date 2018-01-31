@@ -32,12 +32,12 @@
 \usepackage{pgfpages}           % pour les présentations en double-écran
 
 % Paramétrages Beamer %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-@theme.tex@
+% include theme.tex
 %\setbeameroption{show notes on second screen} % les notes sur le second écran
 
 % Méta-données du document %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-@metadata.tex@
+% include cours-metadata.tex
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -49,12 +49,14 @@
 
 \begin{frame}
   \frametitle{Plan}
-  \tableofcontents
+  \tableofcontents % il faut compiler deux fois pour mettre à jour la TDM
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section*{Introduction}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}% [shrink] si on veut forcer à tenir sur une seul frame
   \frametitle{Introduction}
@@ -62,7 +64,7 @@
   \structure{Un exemple}
 
   \begin{itemize}
-  @exemple.tex@
+    % include cours-exemple.tex
   \item Son contenu est un exemple pour comprendre comment
 
     \begin{itemize}
@@ -76,7 +78,7 @@
 
   \structure{Un modèle}
 
-  @modele.tex@
+  % include cours-modele.tex
 
   \pause
 
@@ -87,6 +89,8 @@
 
 \section{Faire une présentation en \LaTeX{} avec Beamer}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \subsection{Les bases}
 \input{01-bases}
 
@@ -96,6 +100,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Une petite référence}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{\LaTeX{}}
 \input{03-latex}

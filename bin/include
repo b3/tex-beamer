@@ -1,0 +1,92 @@
+#!/bin/bash
+# Process a template file for inclusions
+#
+# usage: include [OPTIONS] FILE 
+#
+# This script read FILE and insert files when asked. Inclusions are asked as
+# lines containing filename surrounded by delimiters.
+#
+# Default prefix delimiter is "#include ", suffix one is empty.
+#
+# OPTIONS
+#     -p, --prefix STRING      uses STRING as prefix delimiter
+#     -s, --suffix STRING      uses STRING as suffix delimiter
+#     -I, --include-path PATH  look for files in directories specified in PATH
+#     -h, --help               show this help message
+
+# Copyright (C) 2018 Bruno BEAUFILS <bruno@boulgour.com>
+#
+# This software comes with ABSOLUTELY NO WARRANTY.
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation in its version 2.
+#
+# See the README or COPYING file for details.
+
+# use extended regexps in sed (FreeBSD or GNU)
+if sed v </dev/null >/dev/null 2>&1 ; then # 'v' est spécifique à GNU sed
+    _sed() { sed -r "$@" ; }    # GNU
+else
+    _sed() { sed -E "$@" ; }    # (FreeBSD)
+fi
+
+# doc is commented at the beggining of the script until first empty line
+doc () { sed -n '2,/^$/ { s/^ *#// ; s/^ //g ; t ok ; d ; :ok ; p }' <$0 ; }
+
+# die with an error message
+die () { echo "${0##*/}: error: $*" 1>&2 ; exit 1 ; }
+
+# look for a file
+lookfor ()
+{
+    for d in . $(echo $include_path | tr : ' ')
+    do
+        [ -r "$d/$1" ] && echo "$d/$1" && return
+    done
+}
+
+prefix='#include '
+suffix=
+include_path=.
+
+# options processing
+while test "$(echo $1 | cut -c 1)"  = "-" 
+do
+    case "$1" in
+        "-h"|"--help")
+            doc
+            exit 0
+            ;;
+        "-p"|"--prefix")
+            shift
+            prefix="$1"
+            ;;
+        "-s"|"--suffix")
+            shift
+            suffix="$1"
+            ;;
+        "-I"|"--include-path")
+            shift
+            include_path="$1"
+            ;;
+        *)
+            die "unknown options: $1"
+            break
+            ;;
+    esac
+    shift
+done
+
+[ $# -gt 1 ] && shift && die "too much args: $*"
+
+# prepare sed command
+for i in $(_sed -n "/$prefix/ { s/^.*$prefix(.*)$suffix.*$/\1/ ; p }" "$1")
+do
+    f=$(lookfor $i)
+    [ -z $f ] && die "unable to access file: $i"
+    cmd="$cmd -e '/$prefix$i$suffix/ r $f' -e '/$prefix$i$suffix/ d'"
+done
+
+# run it
+eval _sed $cmd "$1"
