@@ -1,10 +1,19 @@
 % Un thème Beamer pour le GATE
+% Copyright (C) 2015-2018 Bruno BEAUFILS
+% This file is distributed under the terms of the WTFPL license.
+
+\def\filedate{2018/01/31}
 
 % Paramétrages génériques %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% Les couleurs du GATE
 \definecolor{GateBleuFonce}{RGB}{1,28,71}    % en HTML : 011c47
 \definecolor{GateBleuClair}{RGB}{48,131,181} % en HTML : 3083b5
+
+%% Des "jolies" polices de caractères
+\usepackage{lmodern}            % pour sf et tt
+\usepackage{fourier}            % pour rm
+\usepackage{bbm}                % pour les mathbbm
 
 %% Paramétrage hyperref
 \hypersetup{%
@@ -78,3 +87,7 @@
 \setbeamercovered{dynamic}      % on découvre lentement les trucs cachés
 \setbeamersize{text margin left=1em,text margin right=1em}
 
+% Local Variables:
+% time-stamp-active: t 
+% time-stamp-pattern: "5/\\filedate{%:y/%02m/%02d}$"
+% End:
