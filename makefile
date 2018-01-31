@@ -4,6 +4,7 @@ IMG-PNG := $(addsuffix .png,$(basename $(IMG-SVG)))
 IMG-JPG := $(wildcard img/*.jpg)
 MODELES := modele-cours-gate.tex modele-cours-lille1.tex modele-cours-lyon2.tex
 MODELES += modele-presentation-gate.tex modele-presentation-lille1.tex
+PDF := $(addsuffix .pdf,$(basename $(MODELES))) modele-diaporama.pdf
 
 # FreeBSD & GNU sed do not use the same option for ERE
 SED=sed$(shell { sed v </dev/null >/dev/null 2>&1 && echo " -r" ; } || echo " -E" ) 
@@ -21,9 +22,16 @@ img/%.pdf: img/%.svg
 img/%.png: img/%.svg
 	inkscape -z -d 72 -e $@ -T $<
 
+%.pdf: %.tex $(IMG-PDF) $(IMG-PNG)
+	pdflatex $<
+	pdflatex $<
+
+%.pdf: %.md $(IMG-PDF) $(IMG-PNG)
+	bin/md2beamer $^ img
+
 images: $(IMG-PDF) $(IMG-PNG)   ## génère les images PDF et PNG à partir des SVG
 
-modele-cours-%.tex: modele-cours.tex dist/%/*.tex
+modele-cours-%.tex: modele-cours.tex dist/%/*.tex 0*.tex
 	bin/include -p "% include " -I dist/$* $< > $@
 
 modele-presentation-%.tex: modele-presentation.tex dist/%/*.tex
@@ -31,16 +39,19 @@ modele-presentation-%.tex: modele-presentation.tex dist/%/*.tex
 
 ##############################################################################
 
-.PHONY: check clean dist dist-clean modeles
+.PHONY: build check clean dist dist-clean modeles
+
+build: $(PDF)                   ## construit les modèles (version PDF)
 
 check:                          ## vérifier la présence des outils nécessaires
 	@which pdflatex
 	@which inkscape
 
 clean:                          ## supprimer les fichiers inutiles
-	-rm $(shell find . -name "*~")
+	-rm -f $(shell find . -name "*~")
+	-rm -f *.aux *.bbl *.blg *.toc *.lof *.log *.lot *.flg *.out *.nav *.snm *.vrb *.bak *.synctex.gz
 
 dist-clean: clean               ## supprimer les fichiers regénérables
-	-rm $(IMG-PDF) $(IMG-PNG) $(MODELES)
+	-rm -f $(IMG-PDF) $(IMG-PNG) $(MODELES) $(PDF)
 
-modeles: $(MODELES)             ## générer les modèles
+modeles: $(MODELES)             ## construit les modèles (version source)
