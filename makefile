@@ -1,6 +1,6 @@
-MODELES := modele-cours-gate.tex modele-cours-lille1.tex modele-cours-lyon2.tex
-MODELES += simple-lille1.tex simple-yvan.tex
-MODELES += modele-presentation-gate.tex modele-presentation-lille1.tex
+MODELES := modele-cours-gate.tex modele-cours-lille1.tex modele-cours-lyon2.tex modele-cours-bbb.tex
+MODELES += simple-lille1.tex simple-bbb.tex simple-yvan.tex
+MODELES += modele-presentation-gate.tex modele-presentation-lille1.tex modele-presentation-bbb.tex
 
 PDF := $(addsuffix .pdf,$(basename $(MODELES))) modele-diaporama.pdf
 

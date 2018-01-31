@@ -1,8 +1,8 @@
-% Un thème Beamer pour des présentations génériques par Bruno BEAUFILS
-% Copyright (C) 2016-2017 Bruno BEAUFILS
+% Un thème Beamer pour des présentations, cours de Bruno BEAUFILS
+% Copyright (C) 2016-2018 Bruno BEAUFILS
 % This file is distributed under the terms of the WTFPL license.
 
-\def\filedate{2017/09/29}
+\def\filedate{2018/01/31}
 
 % Paramétrages génériques %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -40,8 +40,7 @@
 %% Adaptation des modèles
 
 %%% Page de titre
-\defbeamertemplate*{title page}{bdefault}[1][]
-{
+\defbeamertemplate*{title page}{bdefault}[1][]{%
   \vbox{}
   \vfill
   \begin{centering}
@@ -71,34 +70,43 @@
 %  \end{beamercolorbox}\vskip0.5em
 }
 \setbeamertemplate{title page}[bdefault]
-\let\bmaketitle\maketitle
-\renewcommand{\maketitle}{%
-  {\setbeamertemplate{footline}{}\addtocounter{framenumber}{-1}\bmaketitle}}
+\renewcommand{\maketitle}[1][]{%
+  \addtocounter{framenumber}{-1}\frame[plain,#1]{\titlepage}}
 
 %%% Sections dans la table des matières
 \setbeamertemplate{sections/subsections in toc}[sections numbered]
 
+%%% Une page en début de chaque cours
+\newif\ifnewlecture\newlecturetrue
+\AtBeginLecture{%
+  \ifbeamer@inlecture
+  \ifnewlecture
+  \begin{frame}
+    \begin{centering}
+      \begin{beamercolorbox}[sep=16pt,center]{part title}
+        \usebeamerfont{part title}\insertlecture
+      \end{beamercolorbox}
+    \end{centering}
+  \end{frame}
+  \newlecturefalse
+  \fi
+  \fi
+}
+
 %%% Une page simple devant chaque partie
 \AtBeginPart{\frame{\partpage}}
-\setbeamertemplate{part page}%
-{
+\setbeamertemplate{part page}{%
   \begin{center}
     \usebeamerfont{frametitle}\usebeamercolor[fg]{frametitle}\insertpart
   \end{center}
 }
 
 %% Une page simple (avec table des matières) devant chaque section
-\setbeamertemplate{section page}%
-{
-  \tableofcontents[currentsection]
-}
+\setbeamertemplate{section page}{\tableofcontents[currentsection]}
 \AtBeginSection[]{\frame{\sectionpage}}
 
 %% Une page simple (avec table des matières) devant chaque sous-section
-\setbeamertemplate{subsection page}%
-{
-  \tableofcontents[currentsubsection]
-}
+\setbeamertemplate{subsection page}{\tableofcontents[currentsubsection]}
 \AtBeginSubsection[]{\frame{\subsectionpage}}
 
 %%% Styles des blocs
@@ -109,8 +117,7 @@
 \setbeamertemplate{items}[ball]
 
 %%% Des pieds de diapo simples
-\setbeamertemplate{footline}
-{
+\setbeamertemplate{footline}{%
   \leavevmode%
   \hbox{%
   \begin{beamercolorbox}[wd=\paperwidth,ht=2.25ex,dp=1ex]{frametitle}
