@@ -80,7 +80,7 @@ BEAMER="etc/beamertheme$THEME.sty"
 if $creer ; then
     cp "$BEAMER" "$DESTINATION"
 else
-    echo "$DESTINATION/beamer$THEME.sty"
+    echo "$DESTINATION/beamertheme$THEME.sty"
 fi
 
 # les modèles
