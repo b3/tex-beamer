@@ -82,7 +82,8 @@
 \setbeamertemplate{sections/subsections in toc}[sections numbered]
 
 %%% Une page simple (avec table des matières) devant chaque section
-\setbeamertemplate{section page}{\tableofcontents[currentsection,subsubsectionstyle=show/show/show/shaded]}
+\setbeamertemplate{section page}{%
+  \tableofcontents[currentsection,subsubsectionstyle=show/show/show/shaded]}
 \AtBeginSection[]{\frame{\sectionpage}}
 
 %%% Styles des blocs
