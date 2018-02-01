@@ -9,11 +9,10 @@ débutent dans son utilisation ou dans l'utilisation de Beamer. L'objet est de
 faciliter la production de support de présentation (*Powerpoint* en novlangue)
 avec un rendu simple mais spécifique.
 
-Pour ceux qui connaissent bien [LaTeX](http://www.latex-project.org) et la
-classe [Beamer](https://github.com/josephwright/beamer), les fichiers
-importants sont le thème Beamer
-[`beamerthemelille1.sty`](etc/beamerthemelille1.sty) (`lille1`) et le logo
-vectoriel de l'Université de Lille 1
+Pour ceux qui connaissent [LaTeX](http://www.latex-project.org) et sa classe
+[Beamer](https://github.com/josephwright/beamer), les fichiers importants sont
+le thème Beamer [`beamerthemelille1.sty`](etc/beamerthemelille1.sty)
+(`lille1`) et le logo vectoriel de l'Université de Lille 1
 [`logo-univ-lille1.pdf`](img/logo-univ-lille1.pdf).
 
 Pour les *débutants* pour bien utiliser ces modèles il est recommandé de lire
@@ -22,6 +21,7 @@ une seconde fois en comparant avec le contenu du fichier source
 [modele-cours-lille1.tex](modele-cours-lille1.tex).
 
 La même chose peut-être faite avec
+[modele-presentation-lille1.pdf](modele-presentation-lille1.pdf) et
 [modele-presentation-lille1.tex](modele-presentation-lille1.tex).
 
 Pour ceux qui ont des besoins encore plus rapide et léger (présentations très

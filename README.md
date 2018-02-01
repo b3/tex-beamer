@@ -4,17 +4,11 @@ On trouve ici une collection de styles de présentations Beamer (thèmes, logos)
 confectionné :
 
   - bbb
-  - bbbens
   - gate
-  - gatelyon2
-  - lille1
+  - [lille1](README-lille1.md)
   - lyon2
-  - ulille
+  - lyon2gate
+  - [ulille](README-ulille.md)
   - yvan
 
 On trouve aussi quelques exemples d'utilisation.
-
-[LaTeX](https://www.latex-project.org/) est un outil de composition de texte.
-
-[Beamer](https://github.com/josephwright/beamer) est un paquet LaTeX pour
-préparer des présentations.
