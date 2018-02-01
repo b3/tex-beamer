@@ -11,4 +11,6 @@ confectionné :
   - [ulille](README-ulille.md)
   - yvan
 
+Les styles LaTeX à utiliser sont dans [`etc`](etc), les logos dans [`img`](img).
+
 On trouve aussi quelques exemples d'utilisation.
