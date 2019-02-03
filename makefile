@@ -1,4 +1,3 @@
-
 MODELES := modele-cours-bbb.tex
 MODELES += modele-cours-lille1.tex modele-cours-ulille.tex
 MODELES += modele-cours-gate.tex modele-cours-lyon2.tex
@@ -18,9 +17,9 @@ IMG-PNG := $(addsuffix .png,$(basename $(IMG-SVG)))
 IMG-JPG := $(wildcard img/*.jpg)
 
 # FreeBSD & GNU sed do not use the same option for ERE
-SED=sed$(shell { sed v </dev/null >/dev/null 2>&1 && echo " -r" ; } || echo " -E" ) 
+SED=sed$(shell { sed v </dev/null >/dev/null 2>&1 && echo " -r" ; } || echo " -E" )
 
-all: help
+QUOI = @printf "\nFABRICATION de $@ à partir de $<\n"
 
 help:                           ## liste les cibles disponibles
 	@eval $$($(SED) -n '/^[a-zA-Z0-9_-]+:/ s/^(.*):([^#]*)(## |)(.*)$$/printf "\\033[36m%-15s\\033[0m %s\\n" "\1" "\4";/ ; ta; b; :a p' $(MAKEFILE_LIST))
@@ -28,34 +27,43 @@ help:                           ## liste les cibles disponibles
 ##############################################################################
 
 img/%.pdf: img/%.svg
+	$(QUOI)
 	inkscape -z -d 2400 -A $@ -T $<
 
 img/%.png: img/%.svg
+	$(QUOI)
 	inkscape -z -d 72 -e $@ -T $<
 
 %.pdf: %.tex $(IMG-PDF) $(IMG-PNG)
+	$(QUOI)
 	pdflatex $<
 	pdflatex $<
 
 %.pdf: %.md $(IMG-PDF) $(IMG-PNG)
+	$(QUOI)
 	bin/md2beamer $^ img
 
-images: $(IMG-PDF) $(IMG-PNG)   ## génère les images PDF et PNG à partir des SVG
-
 modele-cours-%.tex: modele-cours.tex dist/%/*.tex 0*.tex etc/*
+	$(QUOI)
 	bin/include -p "% include " -I dist/$* $< > $@
 
 simple-%.tex: simple.tex dist/%/*.tex 0*.tex etc/*
+	$(QUOI)
 	bin/include -p "% include " -I dist/$* $< > $@
 
 modele-presentation-%.tex: modele-presentation.tex dist/%/*.tex etc/*
+	$(QUOI)
 	bin/include -p "% include " -I dist/$* $< > $@
 
 ##############################################################################
 
 .PHONY: build check clean dist dist-clean modeles
 
+modeles: $(MODELES)             ## construit les modèles (version source)
+
 build: $(PDF)                   ## construit les modèles (version PDF)
+
+images: $(IMG-PDF) $(IMG-PNG)   ## génère les images PDF et PNG à partir des SVG
 
 check:                          ## vérifier la présence des outils nécessaires
 	@which pdflatex
@@ -68,4 +76,3 @@ clean:                          ## supprimer les fichiers inutiles
 dist-clean: clean               ## supprimer les fichiers regénérables
 	-rm -f $(IMG-PDF) $(IMG-PNG) $(MODELES) $(PDF)
 
-modeles: $(MODELES)             ## construit les modèles (version source)
