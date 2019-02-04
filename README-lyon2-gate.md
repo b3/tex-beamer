@@ -1,4 +1,4 @@
-# Modèles de présentations pour l'Université de Lille
+# Modèles de présentations pour l'Université de Lyon 2 et le GATE
 
 Des fichiers présents ici s'adressent aux personnes qui veulent des modèles de
 présentation *propres* (c'est-à-dire avec exigence sur la qualité du résultat)
@@ -20,7 +20,7 @@ Pour ceux qui connaissent [LaTeX](http://www.latex-project.org) et sa classe
 - pour l'identité du GATE :
     - le thème [`beamerthemegate.sty`](etc/beamerthemegate.sty) (`gate`),
     - le logo vectoriel du laboratoire [`logo-gate.pdf`](img/logo-gate.pdf) ;
-	
+    
 - pour l'identité de l'Université de Lyon 2 :
     - le thème [`beamerthemelyon2.sty`](etc/beamerthemelyon2.sty) (`lyon2`),
     - le logo vectoriel de l'Université dans sa dernière version [`logo-univ-lyon2-2018.pdf`](img/logo-univ-lyon2-2018.pdf) ;
