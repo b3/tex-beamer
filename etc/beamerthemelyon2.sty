@@ -1,22 +1,14 @@
 % Un thème Beamer pour l'Université de Lyon 2
-% Copyright (C) 2015-2018 Bruno BEAUFILS
+% Copyright (C) 2015-2019 Bruno BEAUFILS
 % This file is distributed under the terms of the WTFPL license.
 
-\def\filedate{2018/01/31}
+\def\filedate{2019/02/04}
 
 % Paramétrages génériques %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% Les couleurs de Lyon 2
-\definecolor{Lyon2Vert}{RGB}{104,183,79}          % en HTML : 7db956
-\definecolor{Lyon2GrisClair}{cmyk}{0,0,0,0.07}    % en HTML : ededed
-\definecolor{Lyon2GrisFonce}{gray}{0.3}           % en HTML : b2b2b2
-\definecolor{Lyon2Formation}{RGB}{167,36,133}     % en HTML : bd2e86
-\definecolor{Lyon2Campus}{RGB}{232,91,108}        % en HTML : e85b6c
-\definecolor{Lyon2Recherche}{RGB}{65,153,217}     % en HTML : 0099cc
-\definecolor{Lyon2International}{RGB}{66,182,185} % en HTML : 55c1bf
-\definecolor{Lyon2Documentation}{RGB}{236,136,0}  % en HTML : ec8800
-\definecolor{Lyon2Personnels}{RGB}{81,76,76}      % en HTML : 635e5a
-\definecolor{Lyon2Pro}{RGB}{14,85,60}             % en HTML : 00664e
+\definecolor{Lyon2Rouge}{RGB}{232,66,66}          % en HTML : e84242
+\definecolor{Lyon2Noir}{RGB}{0,0,0}               % en HTML : 000000
 
 %% Des "jolies" polices de caractères
 \usepackage{lmodern}            % pour sf et tt
@@ -30,7 +22,7 @@
 \hypersetup{%
   colorlinks,%
   linkcolor=,%
-  urlcolor=Lyon2Vert}
+  urlcolor=Lyon2Rouge}
   
 % Paramétrage Beamer %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -38,21 +30,21 @@
 
 %% Logos
 \titlegraphic{%
-  \raisebox{-0.5\height}{\includegraphics[width=6em]{logo-univ-lyon2}}
+  \raisebox{-0.5\height}{\includegraphics[width=6em]{logo-univ-lyon2-2018}}
 }
-\logo{\includegraphics[height=.5cm]{logo-univ-lyon2}}
+\logo{\includegraphics[height=.4cm]{logo-univ-lyon2-2018}}
 
 %% Couleurs
 \usecolortheme{spruce}
-\setbeamercolor{normal text}{fg=Lyon2GrisFonce}
-\setbeamercolor{structure}{fg=Lyon2GrisFonce}
-\setbeamercolor{frametitle}{fg=Lyon2Vert,bg=Lyon2GrisClair}
-\setbeamercolor{title}{fg=Lyon2GrisFonce,bg=white}
-\setbeamercolor{subtitle}{fg=Lyon2Vert}
-\setbeamercolor{footline}{bg=Lyon2Vert,fg=Lyon2GrisClair}
-\setbeamercolor{block title}{bg=Lyon2Vert,fg=Lyon2GrisClair}
-\setbeamercolor{block body}{bg=Lyon2GrisClair,fg=Lyon2GrisFonce}
-\setbeamercolor{alerted text}{fg=Lyon2Vert}
+\setbeamercolor{normal text}{fg=Lyon2Noir}
+\setbeamercolor{structure}{fg=Lyon2Rouge}
+\setbeamercolor{frametitle}{fg=white,bg=Lyon2Rouge}
+\setbeamercolor{title}{fg=white,bg=Lyon2Rouge}
+\setbeamercolor{subtitle}{fg=Lyon2Noir,bg=Lyon2Rouge}
+\setbeamercolor{footline}{bg=Lyon2Rouge,fg=white}
+\setbeamercolor{block title}{bg=Lyon2Rouge,fg=white}
+\setbeamercolor{block body}{bg=white,fg=Lyon2Noir}
+\setbeamercolor{alerted text}{fg=Lyon2Rouge}
 
 %% Polices de caractères
 %\usefonttheme[stillsansseriflarge]{serif}
@@ -71,8 +63,35 @@
 %% Adaptation des modèles
 
 %%% La page de titre
-\renewcommand{\maketitle}[1][]{\addtocounter{framenumber}{-1}\frame[plain,#1]{\titlepage}}
-
+\renewcommand{\maketitle}[1][]{%
+  \addtocounter{framenumber}{-1}
+  {\setbeamercolor{background canvas}{bg=Lyon2Rouge}\frame[plain,#1]{{\titlepage}}}}
+\setbeamertemplate{title page}
+{
+  {\hspace{-1em}\usebeamercolor[fg]{titlegraphic}\inserttitlegraphic\par}
+  \vfill
+  \begingroup
+    \centering
+    \begin{beamercolorbox}[sep=8pt,center]{title}
+      \usebeamerfont{title}\inserttitle\par%
+      \ifx\insertsubtitle\@empty%
+      \else%
+        \vskip0.25em%
+        {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}%
+      \fi%     
+    \end{beamercolorbox}%
+    \vskip1em\par
+    \begin{beamercolorbox}[sep=8pt,center]{author}
+      \usebeamerfont{author}\insertauthor
+    \end{beamercolorbox}
+    \begin{beamercolorbox}[sep=8pt,center]{institute}
+      \usebeamerfont{institute}\insertinstitute
+    \end{beamercolorbox}
+    \begin{beamercolorbox}[sep=8pt,center]{date}
+      \usebeamerfont{date}\insertdate
+    \end{beamercolorbox}\vskip0.5em
+    \endgroup
+}
 %%% Sections dans la table des matières
 \setbeamertemplate{sections/subsections in toc}[sections numbered]
 
@@ -96,13 +115,12 @@
   \leavevmode%
   \hbox{%
     \begin{beamercolorbox}[wd=\paperwidth,ht=2.25ex,dp=1ex]{footline}
-      \usebeamerfont{date in head/foot}
+      \insertlogo
       \hspace*{1.25ex}
+      \usebeamerfont{date in head/foot}
       \inserttitle{} \hspace*{3ex} \emph{\textmd{\insertsection}}
       \hfill\hfill
       \insertframenumber{} / \inserttotalframenumber
-      \hspace*{1ex}
-      \insertlogo
       \hspace*{1.25ex}
     \end{beamercolorbox}}%
   \vskip0pt%
