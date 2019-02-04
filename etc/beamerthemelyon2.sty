@@ -95,9 +95,38 @@
 %%% Sections dans la table des matières
 \setbeamertemplate{sections/subsections in toc}[sections numbered]
 
+%%% Une page en début de chaque cours
+\newif\ifnewlecture\newlecturetrue
+\AtBeginLecture{%
+  \ifbeamer@inlecture
+  \ifnewlecture
+  \begin{frame}
+    \begin{centering}
+      \begin{beamercolorbox}[sep=16pt,center]{part title}
+        \usebeamerfont{part title}\insertlecture
+      \end{beamercolorbox}
+    \end{centering}
+  \end{frame}
+  \newlecturefalse
+  \fi
+  \fi
+}
+
+%%% Une page simple devant chaque partie
+\AtBeginPart{\frame{\partpage}}
+\setbeamertemplate{part page}{%
+  \begin{center}
+    \usebeamerfont{frametitle}\usebeamercolor[fg]{frametitle}\insertpart
+  \end{center}
+}
+
 %%% Une page simple (avec table des matières) devant chaque section
-\setbeamertemplate{section page}{\tableofcontents[currentsection,subsubsectionstyle=show/show/show/shaded]}
+\setbeamertemplate{section page}{\tableofcontents[currentsection]}
 \AtBeginSection[]{\frame{\sectionpage}}
+
+%%% Une page simple (avec table des matières) devant chaque sous-section
+\setbeamertemplate{subsection page}{\tableofcontents[currentsubsection]}
+\AtBeginSubsection[]{\frame{\subsectionpage}}
 
 %%% Styles des blocs
 \setbeamertemplate{blocks}[rounded][shadow=true]

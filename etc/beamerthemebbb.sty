@@ -2,7 +2,7 @@
 % Copyright (C) 2016-2019 Bruno BEAUFILS
 % This file is distributed under the terms of the WTFPL license.
 
-\def\filedate{2019/02/03}
+\def\filedate{2019/02/04}
 
 % Paramétrages génériques %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -109,16 +109,16 @@
   \end{center}
 }
 
-%%% Type des continuations
-\setbeamertemplate{frametitle continuation}[from second][(suite)]
-
-%% Une page simple (avec table des matières) devant chaque section
+%%% Une page simple (avec table des matières) devant chaque section
 \setbeamertemplate{section page}{\tableofcontents[currentsection]}
 \AtBeginSection[]{\frame{\sectionpage}}
 
-%% Une page simple (avec table des matières) devant chaque sous-section
+%%% Une page simple (avec table des matières) devant chaque sous-section
 \setbeamertemplate{subsection page}{\tableofcontents[currentsubsection]}
 \AtBeginSubsection[]{\frame{\subsectionpage}}
+
+%%% Type des continuations
+\setbeamertemplate{frametitle continuation}[from second][(suite)]
 
 %%% Styles des blocs
 \setbeamertemplate{blocks}[rounded][shadow=true]
