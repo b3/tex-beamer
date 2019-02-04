@@ -1,8 +1,8 @@
 % Un thème Beamer pour des présentations, cours de Bruno BEAUFILS
-% Copyright (C) 2016-2018 Bruno BEAUFILS
+% Copyright (C) 2016-2019 Bruno BEAUFILS
 % This file is distributed under the terms of the WTFPL license.
 
-\def\filedate{2018/01/31}
+\def\filedate{2019/02/03}
 
 % Paramétrages génériques %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -20,6 +20,14 @@
 % Paramétrage Beamer %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \mode<presentation>             % pour le mode présentation seulement
+
+%% Correction Beamer
+\makeatletter
+%%% FIXME: \usepackage{etoolbox}
+%%% FIXME: %%% https://tex.stackexchange.com/questions/2072/beamer-navigation-circles-without-subsections#66626
+%%% FIXME: %%% replace the subsection number test with a test that always returns true
+%%% FIXME: \patchcmd{\slideentry}{\ifnum#2>0}{\ifnum2>0}{}{\@error{unable to patch}}
+\makeatother
 
 %% Couleurs
 \usecolortheme{orchid}
@@ -100,6 +108,9 @@
     \usebeamerfont{frametitle}\usebeamercolor[fg]{frametitle}\insertpart
   \end{center}
 }
+
+%%% Type des continuations
+\setbeamertemplate{frametitle continuation}[from second][(suite)]
 
 %% Une page simple (avec table des matières) devant chaque section
 \setbeamertemplate{section page}{\tableofcontents[currentsection]}
