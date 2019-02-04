@@ -1,6 +1,8 @@
 # Modèles de présentations pour Lille 1
 
-**Attention l'Université de Lille 1 n'existe plus (fusionnée dans l'Université de Lille**
+**Attention l'Université de Lille 1 n'existe plus (fusionnée dans l'Université de Lille)**
+
+**Les styles n'évolueront donc plus**
 
 Des fichiers présents ici s'adressent aux personnes qui veulent des modèles de
 présentation *propres* (c'est-à-dire avec exigence sur la qualité du résultat)
