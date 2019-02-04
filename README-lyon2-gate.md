@@ -32,21 +32,28 @@ Pour ceux qui connaissent [LaTeX](http://www.latex-project.org) et sa classe
 
 Pour les *débutants* pour bien utiliser ces modèles il est recommandé de lire
 d'abord un des fichiers d'abord
-[modele-cours-lyon2.pdf](modele-cours-lyon2.pdf),
-[modele-cours-lyon2gate.pdf](modele-cours-lyon2gate.pdf) ou
-[modele-cours-gate.pdf](modele-cours-gate.pdf) puis de le relire une seconde
+[modele-cours-lyon2.pdf](modele-cours-lyon2.pdf) puis de le relire une seconde
 fois en comparant avec le contenu des fichiers sources
-[modele-cours-lyon2.tex](modele-cours-lyon2.tex),
-[modele-cours-lyon2gate.tex](modele-cours-lyon2gate.tex) ou
-[modele-cours-gate.tex](modele-cours-gate.tex).
+[modele-cours-lyon2.tex](modele-cours-lyon2.tex).
 
-La même chose peut-être faite avec
-[modele-presentation-gate.pdf](modele-presentation-gate.pdf),
-[modele-presentation-lyon2.pdf](modele-presentation-lyon2.pdf) ou
-[modele-presentation-lyon2gate.pdf](modele-presentation-lyon2gate.pdf) et
-[modele-presentation-gate.tex](modele-presentation-gate.tex),
-[modele-presentation-lyon2.tex](modele-presentation-lyon2.tex) ou
-[modele-presentation-lyon2gate.tex](modele-presentation-lyon2gate.tex).
+La même chose est faisable pour les 2 autres thèmes :
+
+- pour `lyon2gate` via
+  [modele-cours-lyon2gate.pdf](modele-cours-lyon2gate.pdf) et
+  [modele-cours-lyon2gate.tex](modele-cours-lyon2gate.tex) ;
+- pour `gate` via [modele-cours-gate.pdf](modele-cours-gate.pdf) et
+  [modele-cours-gate.tex](modele-cours-gate.tex).
+
+Il y a aussi des exemples pour des présentations plutôt que des cours chacun
+des thèmes :
+
+- `gate` via [modele-presentation-gate.pdf](modele-presentation-gate.pdf) et
+  [modele-presentation-gate.tex](modele-presentation-gate.tex),
+- `lyon2` via [modele-presentation-lyon2.pdf](modele-presentation-lyon2.pdf)
+  et [modele-presentation-lyon2.tex](modele-presentation-lyon2.tex),
+- `lyon2gate` via
+  [modele-presentation-lyon2gate.pdf](modele-presentation-lyon2gate.pdf) et
+  [modele-presentation-lyon2gate.tex](modele-presentation-lyon2gate.tex).
 
 Pour ceux qui ont des besoins encore plus rapide et léger (présentations très
 simples), le script [md2beamer](bin/md2beamer) permet de transformer un
