@@ -4,10 +4,10 @@ On trouve ici une collection de styles de présentations Beamer (thèmes, logos)
 confectionné :
 
   - bbb
-  - gate
+  - [gate](README-lyon2gate.md)
   - [lille1](README-lille1.md)
-  - lyon2
-  - lyon2gate
+  - [lyon2](README-lyon2gate.md)
+  - [lyon2gate](README-lyon2gate.md)
   - [ulille](README-ulille.md)
   - yvan
 
