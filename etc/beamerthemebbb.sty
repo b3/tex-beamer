@@ -2,7 +2,7 @@
 % Copyright (C) 2016-2019 Bruno BEAUFILS
 % This file is distributed under the terms of the WTFPL license.
 
-\def\filedate{2019/02/04}
+\def\filedate{2020/11/17}
 
 % Paramétrages génériques %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -10,6 +10,10 @@
 \usepackage{lmodern}            % pour sf et tt
 \usepackage{fourier}            % pour rm
 \usepackage{bbm}                % pour les mathbbm
+
+%% Pour les dessins portables et fond de diapo
+\usepackage{tikz}
+\usepackage{pgfpages}
 
 %% Paramétrage hyperref
 \hypersetup{%
@@ -19,15 +23,39 @@
 
 % Paramétrage Beamer %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\mode<presentation>             % pour le mode présentation seulement
+%% Options du thème
 
-%% Correction Beamer
-\makeatletter
-%%% FIXME: \usepackage{etoolbox}
-%%% FIXME: %%% https://tex.stackexchange.com/questions/2072/beamer-navigation-circles-without-subsections#66626
-%%% FIXME: %%% replace the subsection number test with a test that always returns true
-%%% FIXME: \patchcmd{\slideentry}{\ifnum#2>0}{\ifnum2>0}{}{\@error{unable to patch}}
-\makeatother
+%%% page en début de chaque partie ou non
+\newif\ifpartpage\partpagetrue
+\DeclareOptionBeamer{partpage}{\partpagetrue}
+\DeclareOptionBeamer{nopartpage}{\partpagefalse}
+
+%%% page en début de chaque section ou non
+\newif\ifsectionpage\sectionpagetrue
+\DeclareOptionBeamer{sectionpage}{\sectionpagetrue}
+\DeclareOptionBeamer{nosectionpage}{\sectionpagefalse}
+
+%%% page en début de chaque subsection ou non
+\newif\ifsubsectionpage\subsectionpagetrue
+\DeclareOptionBeamer{subsectionpage}{\subsectionpagetrue}
+\DeclareOptionBeamer{nosubsectionpage}{\subsectionpagefalse}
+
+%%% la section dans le pied de page
+\newif\ifsectioninfoot\sectioninfoottrue
+\DeclareOptionBeamer{sectioninfoot}{\sectioninfoottrue}
+\DeclareOptionBeamer{nosectioninfoot}{\sectioninfootfalse}
+
+%%% type de présentation
+\DeclareOptionBeamer{long}{%
+  \partpagetrue\sectionpagetrue\subsectionpagetrue%
+  \sectioninfoottrue}
+\DeclareOptionBeamer{short}{%
+  \partpagefalse\sectionpagefalse\subsectionpagefalse%
+  \sectioninfootfalse}
+
+\ProcessOptionsBeamer
+
+\mode<presentation>             % pour le mode présentation seulement
 
 %% Couleurs
 \usecolortheme{orchid}
@@ -47,8 +75,18 @@
 
 %% Adaptation des modèles
 
+%%% Image de fond pour la page de titre
+\newif\ifbackgroundtitle\backgroundtitlefalse
+\newcommand{\backgroundtitle}[1]{\backgroundtitletrue\def\insertbackgroundtitle{#1}}
+
 %%% Page de titre
 \defbeamertemplate*{title page}{bdefault}[1][]{%
+  \ifbackgroundtitle
+  \tikz[remember picture,overlay]
+    \node[opacity=0.2,inner sep=0pt] at (current page.center){%
+      \includegraphics[width=\paperwidth,height=\paperheight]{\insertbackgroundtitle}%
+    };%
+  \fi
   \vbox{}
   \vfill
   \begin{centering}
@@ -73,49 +111,57 @@
     {\usebeamercolor[fg]{titlegraphic}\inserttitlegraphic\par}
   \end{centering}
   \vfill
-%  \begin{beamercolorbox}[sep=8pt,wd=\linewidth,#1]{license}
-%    \usebeamerfont{license}\insertlicense
-%  \end{beamercolorbox}\vskip0.5em
+%%%  \begin{beamercolorbox}[sep=8pt,wd=\linewidth,#1]{license}
+%%%    \usebeamerfont{license}\insertlicense
+%%%  \end{beamercolorbox}\vskip0.5em
 }
 \setbeamertemplate{title page}[bdefault]
-\renewcommand{\maketitle}[1][]{%
+\renewcommand{\maketitle}[1][]{% pas de numéro sur la page de titre
   \addtocounter{framenumber}{-1}\frame[plain,#1]{\titlepage}}
 
 %%% Sections dans la table des matières
 \setbeamertemplate{sections/subsections in toc}[sections numbered]
 
-%%% Une page en début de chaque cours
-\newif\ifnewlecture\newlecturetrue
-\AtBeginLecture{%
-  \ifbeamer@inlecture
-  \ifnewlecture
-  \begin{frame}
-    \begin{centering}
-      \begin{beamercolorbox}[sep=16pt,center]{part title}
-        \usebeamerfont{part title}\insertlecture
-      \end{beamercolorbox}
-    \end{centering}
-  \end{frame}
-  \newlecturefalse
-  \fi
-  \fi
-}
+%%% %%% Une page en début de chaque cours
+%%% \iflecturepage
+%%% \newif\ifnewlecture\newlecturetrue
+%%% \AtBeginLecture{%
+%%%   \ifbeamer@inlecture
+%%%   \ifnewlecture
+%%%   \begin{frame}
+%%%     \begin{centering}
+%%%       \begin{beamercolorbox}[sep=16pt,center]{part title}
+%%%         \usebeamerfont{part title}\insertlecture
+%%%       \end{beamercolorbox}
+%%%     \end{centering}
+%%%   \end{frame}
+%%%   \newlecturefalse
+%%%   \fi
+%%%   \fi
+%%% }
+%%% \fi
 
 %%% Une page simple devant chaque partie
+\ifpartpage
 \AtBeginPart{\frame{\partpage}}
 \setbeamertemplate{part page}{%
   \begin{center}
     \usebeamerfont{frametitle}\usebeamercolor[fg]{frametitle}\insertpart
   \end{center}
 }
+\fi
 
 %%% Une page simple (avec table des matières) devant chaque section
+\ifsectionpage
 \setbeamertemplate{section page}{\tableofcontents[currentsection]}
 \AtBeginSection[]{\frame{\sectionpage}}
+\fi
 
 %%% Une page simple (avec table des matières) devant chaque sous-section
+\ifsubsectionpage
 \setbeamertemplate{subsection page}{\tableofcontents[currentsubsection]}
 \AtBeginSubsection[]{\frame{\subsectionpage}}
+\fi
 
 %%% Type des continuations
 \setbeamertemplate{frametitle continuation}[from second][(suite)]
@@ -125,19 +171,27 @@
 \setbeamerfont{block title}{size={}}
 
 %%% Style des listes
-\setbeamertemplate{items}[ball]
+\setbeamertemplate{itemize item}[ball]
+\setbeamertemplate{itemize subitem}[triangle]
+\setbeamertemplate{itemize subsubitem}[square]
+
+\setbeamertemplate{enumerate item}[ball]
+\setbeamertemplate{enumerate subitem}[circle]
+\setbeamertemplate{enumerate subsubitem}[square]
 
 %%% Des pieds de diapo simples
-\setbeamertemplate{footline}{%
+\setbeamertemplate{footline}
+{
   \leavevmode%
   \hbox{%
-  \begin{beamercolorbox}[wd=\paperwidth,ht=2.25ex,dp=1ex]{frametitle}
-    \usebeamerfont{date in head/foot}
-    \hspace*{2ex}
-    \textbf{\insertshorttitle} \hspace*{3ex} \emph{\textmd{\insertsection}} 
-    \hfill
-    \insertframenumber{} / \inserttotalframenumber\hspace*{2ex}
-  \end{beamercolorbox}}%
+    \begin{beamercolorbox}[wd=\paperwidth,ht=2.25ex,dp=1ex]{frametitle}
+      \usebeamerfont{date in head/foot}%
+      \hspace*{2ex}
+      \textbf{\insertshorttitle}%
+      \ifsectioninfoot \hspace*{3ex} \emph{\textmd{\insertsection}}\fi
+      \hfill
+      \insertframenumber{} / \inserttotalframenumber\hspace*{2ex}
+    \end{beamercolorbox}}%
   \vskip0pt%
 }
 \setbeamertemplate{navigation symbols}{} % pas de navigation affichée
