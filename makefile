@@ -1,13 +1,15 @@
-MODELES := modele-cours-bbb.tex
-MODELES += modele-cours-ulille.tex
-MODELES += modele-cours-gate.tex modele-cours-lyon2.tex modele-cours-lyon2gate.tex
+MODELES := exemple-bbb-cours.tex
+MODELES += exemple-ulille-cours.tex exemple-lille1-cours.tex
+MODELES += exemple-gate-cours.tex exemple-lyon2-cours.tex exemple-lyon2gate-cours.tex
 
-MODELES += simple-bbb.tex simple-yvan.tex
-MODELES += simple-ulille.tex
+MODELES += exemple-bbb-simple.tex exemple-yvan-simple.tex
+MODELES += exemple-ulille-simple.tex
 
-MODELES += modele-presentation-bbb.tex
-MODELES += modele-presentation-ulille.tex
-MODELES += modele-presentation-gate.tex modele-presentation-lyon2.tex modele-presentation-lyon2gate.tex
+MODELES += exemple-bbb-options.tex
+
+MODELES += exemple-bbb-presentation.tex
+MODELES += exemple-ulille-presentation.tex exemple-lille1-presentation.tex
+MODELES += exemple-gate-presentation.tex exemple-lyon2-presentation.tex exemple-lyon2gate-presentation.tex
 
 PDF := $(addsuffix .pdf,$(basename $(MODELES))) modele-diaporama.pdf
 
@@ -16,8 +18,8 @@ IMG-PDF := $(addsuffix .pdf,$(basename $(IMG-SVG)))
 IMG-PNG := $(addsuffix .png,$(basename $(IMG-SVG)))
 IMG-JPG := $(wildcard img/*.jpg)
 
-# FreeBSD & GNU sed do not use the same option for ERE
-SED=sed$(shell { sed v </dev/null >/dev/null 2>&1 && echo " -r" ; } || echo " -E" )
+# POSIX shell for all for ERE
+SED := sed $(shell sed v </dev/null >/dev/null 2>&1 && echo " --posix") -E
 
 QUOI = @printf "\nFABRICATION de $@ à partir de $<\n"
 
@@ -28,11 +30,11 @@ help:                           ## liste les cibles disponibles
 
 img/%.pdf: img/%.svg
 	$(QUOI)
-	inkscape -z -d 2400 -A $@ -T $<
+	inkscape -d 2400 -o $@ -T $<
 
 img/%.png: img/%.svg
 	$(QUOI)
-	inkscape -z -d 72 -e $@ -T $<
+	inkscape -d 72 -o $@ -T $<
 
 %.pdf: %.tex $(IMG-PDF) $(IMG-PNG)
 	$(QUOI)
@@ -43,15 +45,19 @@ img/%.png: img/%.svg
 	$(QUOI)
 	bin/md2beamer $^ img
 
-modele-cours-%.tex: modele-cours.tex dist/%/*.tex 0*.tex etc/*
+exemple-%-cours.tex: modele-cours.tex dist/%/*.tex 0*.tex etc/*
 	$(QUOI)
 	bin/include -p "% include " -I dist/$* $< > $@
 
-simple-%.tex: simple.tex dist/%/*.tex 0*.tex etc/*
+exemple-%-presentation.tex: modele-presentation.tex dist/%/*.tex etc/*
 	$(QUOI)
 	bin/include -p "% include " -I dist/$* $< > $@
 
-modele-presentation-%.tex: modele-presentation.tex dist/%/*.tex etc/*
+exemple-%-simple.tex: modele-simple.tex dist/%/*.tex 0*.tex etc/*
+	$(QUOI)
+	bin/include -p "% include " -I dist/$* $< > $@
+
+exemple-%-options.tex: modele-options.tex dist/%/*.tex etc/*
 	$(QUOI)
 	bin/include -p "% include " -I dist/$* $< > $@
 
@@ -73,6 +79,6 @@ clean:                          ## supprimer les fichiers inutiles
 	-rm -f $(shell find . -name "*~")
 	-rm -f *.aux *.bbl *.blg *.toc *.lof *.log *.lot *.flg *.out *.nav *.snm *.vrb *.bak *.synctex.gz
 
-dist-clean: clean               ## supprimer les fichiers regénérables
+reset: clean                    ## supprimer les fichiers regénérables
 	-rm -f $(IMG-PDF) $(IMG-PNG) $(MODELES) $(PDF)
 
