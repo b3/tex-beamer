@@ -2,7 +2,7 @@
 % Copyright (C) 2018-2019 Bruno BEAUFILS
 % This file is distributed under the terms of the WTFPL license.
 
-\def\filedate{2019/02/04}
+\def\filedate{2020/11/17}
 
 % Paramétrages génériques %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -37,6 +37,38 @@
   
 % Paramétrage Beamer %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%% Options du thème
+
+%%% page en début de chaque partie ou non
+\newif\ifpartpage\partpagetrue
+\DeclareOptionBeamer{partpage}{\partpagetrue}
+\DeclareOptionBeamer{nopartpage}{\partpagefalse}
+
+%%% page en début de chaque section ou non
+\newif\ifsectionpage\sectionpagetrue
+\DeclareOptionBeamer{sectionpage}{\sectionpagetrue}
+\DeclareOptionBeamer{nosectionpage}{\sectionpagefalse}
+
+%%% page en début de chaque subsection ou non
+\newif\ifsubsectionpage\subsectionpagetrue
+\DeclareOptionBeamer{subsectionpage}{\subsectionpagetrue}
+\DeclareOptionBeamer{nosubsectionpage}{\subsectionpagefalse}
+
+%%% la section dans le pied de page
+\newif\ifsectioninfoot\sectioninfoottrue
+\DeclareOptionBeamer{sectioninfoot}{\sectioninfoottrue}
+\DeclareOptionBeamer{nosectioninfoot}{\sectioninfootfalse}
+
+%%% type de présentation
+\DeclareOptionBeamer{long}{%
+  \partpagetrue\sectionpagetrue\subsectionpagetrue%
+  \sectioninfoottrue}
+\DeclareOptionBeamer{short}{%
+  \partpagefalse\sectionpagefalse\subsectionpagefalse%
+  \sectioninfootfalse}
+
+\ProcessOptionsBeamer
+
 \mode<presentation>             % pour le mode présentation seulement
 
 %% Logos
@@ -50,7 +82,7 @@
 \setbeamercolor{normal text}{fg=Lille1NeutreNoir}
 \setbeamercolor{structure}{fg=black}
 \setbeamercolor{frametitle}{fg=white,bg=Lille1Pourpre}
-\setbeamercolor{title}{fg=Lille1Pourpre,bg=white}
+\setbeamercolor{title}{fg=Lille1Pourpre,bg=}
 \setbeamercolor{subtitle}{fg=Lille1NeutreBleu}
 \setbeamercolor{footline}{fg=white,bg=Lille1Pourpre}
 \setbeamercolor{block title}{fg=white,bg=Lille1Pourpre}
@@ -82,38 +114,27 @@
 %%% Sections dans la table des matières
 \setbeamertemplate{sections/subsections in toc}[sections numbered]
 
-%%% Une page en début de chaque cours
-\newif\ifnewlecture\newlecturetrue
-\AtBeginLecture{%
-  \ifbeamer@inlecture
-  \ifnewlecture
-  \begin{frame}
-    \begin{centering}
-      \begin{beamercolorbox}[sep=16pt,center]{part title}
-        \usebeamerfont{part title}\insertlecture
-      \end{beamercolorbox}
-    \end{centering}
-  \end{frame}
-  \newlecturefalse
-  \fi
-  \fi
-}
-
 %%% Une page simple devant chaque partie
+\ifpartpage
 \AtBeginPart{\frame{\partpage}}
 \setbeamertemplate{part page}{%
   \begin{center}
     \usebeamerfont{frametitle}\usebeamercolor[fg]{frametitle}\insertpart
   \end{center}
 }
+\fi
 
 %%% Une page simple (avec table des matières) devant chaque section
+\ifsectionpage
 \setbeamertemplate{section page}{\tableofcontents[currentsection]}
 \AtBeginSection[]{\frame{\sectionpage}}
+\fi
 
 %%% Une page simple (avec table des matières) devant chaque sous-section
+\ifsubsectionpage
 \setbeamertemplate{subsection page}{\tableofcontents[currentsubsection]}
 \AtBeginSubsection[]{\frame{\subsectionpage}}
+\fi
 
 %%% Styles des blocs
 \setbeamertemplate{blocks}[rounded][shadow=true]
@@ -133,7 +154,8 @@
     \begin{beamercolorbox}[wd=\paperwidth,ht=2.25ex,dp=1ex]{footline}
       \usebeamerfont{date in head/foot}
       \hspace*{1.25ex}
-      \inserttitle{} \hspace*{3ex} \emph{\textmd{\insertsection}}
+      \inserttitle{}%
+      \ifsectioninfoot \hspace*{3ex} \emph{\textmd{\insertsection}\fi}
       \hfill
       \insertframenumber{} / \inserttotalframenumber
       \hspace*{1.25ex}
