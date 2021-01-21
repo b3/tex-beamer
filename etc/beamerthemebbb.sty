@@ -2,7 +2,7 @@
 % Copyright (C) 2016-2019 Bruno BEAUFILS
 % This file is distributed under the terms of the WTFPL license.
 
-\def\filedate{2020/11/17}
+\def\filedate{2021/01/21}
 
 % Paramétrages génériques %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -81,11 +81,13 @@
 
 %%% Page de titre
 \defbeamertemplate*{title page}{bdefault}[1][]{%
+  % image de fond
   \ifbackgroundtitle
-  \tikz[remember picture,overlay]
-    \node[opacity=0.2,inner sep=0pt] at (current page.center){%
+  \begin{tikzpicture}[remember picture,overlay]
+    \node[opacity=0.15,inner sep=0pt] at (current page.center){%
       \includegraphics[width=\paperwidth,height=\paperheight]{\insertbackgroundtitle}%
-    };%
+    };
+  \end{tikzpicture}
   \fi
   \vbox{}
   \vfill
