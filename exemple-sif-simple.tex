@@ -1,0 +1,67 @@
+\documentclass[10pt,t]{beamer}
+% [aspectratio=169] pour du 16/9
+
+\usepackage[french]{babel}
+\usepackage{type1ec}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+
+\usetheme{sif}
+
+\title[SIF]{Un modèle simple}
+\subtitle{Avec \LaTeX{} et Beamer}
+\author{Bruno BEAUFILS}
+\institute[]{GT Moyens Informatiques}
+\date{21 janvier 2021}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% [shrink] si on veut forcer à tenir sur une seul frame
+% [plain] si on ne veut pas de décoration
+% [fragile] s'il y du texte verbatim
+\begin{frame}{Introduction} 
+  \structure{Un exemple}
+
+  \begin{itemize}
+  \item Cette présentation est produite par \texttt{\textbf{exemple-sif-simple.tex}}
+  \item Elle est conçue pour la \href{https://www.societe-informatique-de-france.fr}{Société Informatique de France}
+  \item Son contenu est un exemple pour comprendre comment
+
+    \begin{itemize}
+    \item composer avec \LaTeX{}
+    \item préparer une présentation avec Beamer
+    \end{itemize}
+
+  \end{itemize}
+
+  \pause
+
+  \structure{Un modèle}
+
+  \begin{itemize}
+  \item Elle constitue un modèle pour faire d'autres présentation :
+      
+    \begin{enumerate}
+    \item créer un nouveau dossier ;
+    \item y copier les fichiers 
+      
+      \begin{itemize}
+      \item \texttt{\textbf{beamerthemesif.sty}}, qui est le thème Beamer ;
+      \item \texttt{\textbf{logo-sif.pdf}}, qui est le logo de la SIF ;
+      \item \texttt{\textbf{bandeau-sif.pdf}}, qui est le bandeau de bas de page ;
+      \end{itemize}
+      
+    \item y copier, renommer puis modifier le fichier \texttt{\textbf{exemple-sif-simple.tex}} ;
+    \item y compiler le fichier.
+    \end{enumerate}
+  \end{itemize}
+\end{frame}
+
+\end{document}

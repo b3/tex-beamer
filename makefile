@@ -1,15 +1,19 @@
 MODELES := exemple-bbb-cours.tex
 MODELES += exemple-ulille-cours.tex exemple-lille1-cours.tex
 MODELES += exemple-gate-cours.tex exemple-lyon2-cours.tex exemple-lyon2gate-cours.tex
+MODELES += exemple-sif-cours.tex
 
 MODELES += exemple-bbb-simple.tex exemple-yvan-simple.tex
 MODELES += exemple-ulille-simple.tex
+MODELES += exemple-sif-simple.tex
 
 MODELES += exemple-bbb-options.tex
+MODELES += exemple-sif-options.tex
 
 MODELES += exemple-bbb-presentation.tex
 MODELES += exemple-ulille-presentation.tex exemple-lille1-presentation.tex
 MODELES += exemple-gate-presentation.tex exemple-lyon2-presentation.tex exemple-lyon2gate-presentation.tex
+MODELES += exemple-sif-presentation.tex
 
 PDF := $(addsuffix .pdf,$(basename $(MODELES))) modele-diaporama.pdf
 
