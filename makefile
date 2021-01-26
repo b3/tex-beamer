@@ -42,32 +42,32 @@ img/%.png: img/%.svg
 
 %.pdf: %.tex $(IMG-PDF) $(IMG-PNG)
 	$(QUOI)
-	pdflatex $<
-	pdflatex $<
+	pdflatex -halt-on-error $< >/dev/null
+	pdflatex -halt-on-error $< >/dev/null
 
 %.pdf: %.md $(IMG-PDF) $(IMG-PNG)
 	$(QUOI)
 	bin/md2beamer $^ img
 
-exemple-%-cours.tex: modele-cours.tex dist/%/*.tex 0*.tex etc/*
+exemple-%-cours.tex: modele-cours.tex dist/%/*.tex 0*.tex etc/beamertheme%.sty
 	$(QUOI)
 	bin/include -p "% include " -I dist/$* $< > $@
 
-exemple-%-presentation.tex: modele-presentation.tex dist/%/*.tex etc/*
+exemple-%-presentation.tex: modele-presentation.tex dist/%/*.tex etc/beamertheme%.sty
 	$(QUOI)
 	bin/include -p "% include " -I dist/$* $< > $@
 
-exemple-%-simple.tex: modele-simple.tex dist/%/*.tex 0*.tex etc/*
+exemple-%-simple.tex: modele-simple.tex dist/%/*.tex 0*.tex etc/beamertheme%.sty
 	$(QUOI)
 	bin/include -p "% include " -I dist/$* $< > $@
 
-exemple-%-options.tex: modele-options.tex dist/%/*.tex etc/*
+exemple-%-options.tex: modele-options.tex dist/%/*.tex etc/beamertheme%.sty
 	$(QUOI)
 	bin/include -p "% include " -I dist/$* $< > $@
 
 ##############################################################################
 
-.PHONY: build check clean dist dist-clean modeles
+.PHONY: check clean dist reset
 
 modeles: $(MODELES)             ## construit les modèles (version source)
 
