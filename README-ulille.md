@@ -1,8 +1,10 @@
 # Modèles de présentations pour l'Université de Lille
 
-Des fichiers présents ici s'adressent aux personnes qui veulent des modèles de
-présentation *propres* (c'est-à-dire avec exigence sur la qualité du résultat)
-utilisant l'identité de l'[Université de Lille](http://www.univ-lille.fr).
+Des fichiers présents ici s'adressent aux personnes qui veulent des
+modèles de présentation *propres* (c'est-à-dire avec exigence sur la
+qualité du résultat) utilisant
+l'[identité](https://identite.univ-lille.fr) de l'[Université de
+Lille](http://www.univ-lille.fr).
 
 Ça s'adresse aussi aux personnes qui ne connaissent pas très bien le système
 de composition de texte [LaTeX](https://www.latex-project.org) ou qui débutent
