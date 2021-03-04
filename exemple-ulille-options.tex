@@ -1,0 +1,70 @@
+\documentclass[10pt,t]{beamer}
+% [aspectratio=169] pour du 16/9
+
+\usepackage[french]{babel}
+\usepackage{type1ec}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+
+\usetheme[court]{ulille}
+
+\title{Un modèle simple}
+\subtitle{Avec \LaTeX{} et Beamer}
+\author{Prénom NOM}
+\institute[]{Université de Lille}
+\date{2017/2018}
+
+\titlebackground{tex-friendly-zone}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Introduction}
+
+% [shrink] si on veut forcer à tenir sur une seul frame
+% [plain] si on ne veut pas de décoration
+% [fragile] s'il y du texte verbatim
+\begin{frame}{Introduction} 
+  \structure{Un exemple}
+
+  \begin{itemize}
+  \item Cette présentation est produite par \texttt{\textbf{exemple-ulille-simple.tex}}
+  \item Elle est conçue pour des cours magistraux à l'Université de Lille
+  \item Son contenu est un exemple pour comprendre comment
+
+    \begin{itemize}
+    \item composer avec \LaTeX{}
+    \item préparer une présentation avec Beamer
+    \end{itemize}
+
+  \end{itemize}
+
+  \pause
+
+  \structure{Un modèle}
+
+  \begin{itemize}
+  \item Elle constitue un modèle pour faire d'autres cours :
+      
+    \begin{enumerate}
+    \item créer un nouveau dossier ;
+    \item y copier les fichiers 
+      
+      \begin{itemize}
+      \item \texttt{\textbf{beamerthemeulille.sty}}, qui est le thème Beamer pour l'Université de Lille,
+      \item \texttt{\textbf{logo-univ-ulille.pdf}}, qui est le logo de l'Université de Lille utilisé,
+      \end{itemize}
+      
+    \item y copier, renommer puis modifier le fichier \texttt{\textbf{exemple-ulille-simple.tex}} ;
+    \item y compiler le fichier.
+    \end{enumerate}
+  \end{itemize}
+\end{frame}
+
+\end{document}

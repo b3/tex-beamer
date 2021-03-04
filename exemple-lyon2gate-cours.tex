@@ -32,6 +32,7 @@
 % Paramétrages Beamer %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usetheme{lyon2gate}
 % \setbeameroption{show notes on second screen} % les notes sur le second écran
+% \setbeamercovered{invisible} % ne pas montrer les éléments cachés
 %\AtBeginPart[]{}       % enlever les diapos d'introduction des parties
 %\AtBeginSection[]{}    % enlever les diapos d'introduction des sections
 %\AtBeginSubsection[]{} % enlever les diapos d'introduction des sous-sections
@@ -133,7 +134,7 @@
 \subsection{Références}
 \input{05-references}
 
-\againframe{titre} % Replace une diapo nommée avec l'option label
+\againframe[plain]{titre} % Replace une diapo nommée avec l'option label
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

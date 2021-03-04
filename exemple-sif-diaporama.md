@@ -1,6 +1,6 @@
 ---
 title: Préparer une présentation simplement
-subtitle: `md2pdf`
+subtitle: avec `md2pdf`
 author:
 - "**Bruno BEAUFILS**"
 - John MAC FARLANE
@@ -26,7 +26,7 @@ toc: true
     1. créer un nouveau dossier
     2. y copier, renommer puis **modifier** le fichier `exemple-sif-diaporama.md`
         - copier également le thème (`etc/beamerthemesif.sty`)
-        - copier également les images nécessaire (voir dossier `img`)
+        - copier également les images nécessaires (voir dossier `img`)
     3. créer la présentation via la commande
 
         ```console
