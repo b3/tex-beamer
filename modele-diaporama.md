@@ -1,6 +1,6 @@
 ---
 title: Préparer une présentation simplement
-subtitle: `md2pdf`
+subtitle: avec `md2pdf`
 author:
 - "**Bruno BEAUFILS**"
 - John MAC FARLANE
