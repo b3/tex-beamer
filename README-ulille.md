@@ -24,7 +24,8 @@ classe [Beamer](https://github.com/josephwright/beamer), les fichiers
 importants sont :
 
 - le thème [`beamerthemeulille.sty`](etc/beamerthemeulille.sty),
-- le logo vectoriel de la ULILLE [`logo-ulille.pdf`](img/logo-ulille.pdf).
+- le logo vectoriel de la ULILLE
+  [`logo-univ-lille.pdf`](img/logo-univ-lille.pdf).
 
 Pour les *débutants* pour bien utiliser ces modèles il est recommandé
 de lire le fichier [exemple-ulille-cours.pdf](exemple-ulille-cours.pdf) puis
