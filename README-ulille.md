@@ -35,7 +35,7 @@ fichiers sources [exemple-ulille-cours.tex](exemple-ulille-cours.tex).
 Il y a aussi des exemples pour des présentations différentes :
 
 - [exemple-ulille-presentation.pdf](exemple-ulille-presentation.pdf),
-- [exemple-ulille-simple.pdf](exemple-ulille-exemple.pdf),
+- [exemple-ulille-simple.pdf](exemple-ulille-simple.pdf),
 - [exemple-ulille-options.pdf](exemple-ulille-options.pdf).
 
 ### Paramétrages du thème Beamer
