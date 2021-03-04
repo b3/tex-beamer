@@ -17,20 +17,19 @@ toc: true
 
 ### Un exemple
 
-- Cette présentation est produite à partir de `exemple-@THEME@-diaporama.md`
+- Cette présentation est produite à partir de `exemple-lyon2-diaporama.md`
 - Elle est conçue pour des présentations simples
 
 ### Un modèle
 
 - Elle peut constituer un *modèle* pour faire d'autre présentations :
     1. créer un nouveau dossier
-    2. y copier, renommer puis **modifier** le fichier `exemple-@THEME@-diaporama.md`
-        - copier également le thème (`etc/beamertheme@THEME@.sty`)
-        - copier également les images nécessaire (voir dossier `img`)
+    2. y copier, renommer puis **modifier** le fichier `exemple-lyon2-diaporama.md`
+        - copier également les images (dossier `img`) si nécessaire
     3. créer la présentation via la commande
 
         ```console
-        md2pdf -t @THEME@ nom-du-fichier.md
+        md2pdf -t lyon2 nom-du-fichier.md
         ```
 
 
@@ -81,7 +80,7 @@ toc: true
     - pas de constructions complexes (solution : utiliser \LaTeX{}/Beamer directement)
     - pas d'utilisation simple de caractères unicode exotique
     - difficile à débugger sans maîtriser la chaîne `pandoc`/`pdflatex`
-        - passer par \LaTeX{} peut aider (`md2pdf -L`)
+        - passer par \LaTeX{} via peut aider (`md2pdf -L`)
 
 
 # Une courte référence

@@ -17,20 +17,20 @@ toc: true
 
 ### Un exemple
 
-- Cette présentation est produite à partir de `exemple-@THEME@-diaporama.md`
+- Cette présentation est produite à partir de `exemple-sif-diaporama.md`
 - Elle est conçue pour des présentations simples
 
 ### Un modèle
 
 - Elle peut constituer un *modèle* pour faire d'autre présentations :
     1. créer un nouveau dossier
-    2. y copier, renommer puis **modifier** le fichier `exemple-@THEME@-diaporama.md`
-        - copier également le thème (`etc/beamertheme@THEME@.sty`)
+    2. y copier, renommer puis **modifier** le fichier `exemple-sif-diaporama.md`
+        - copier également le thème (`etc/beamerthemesif.sty`)
         - copier également les images nécessaire (voir dossier `img`)
     3. créer la présentation via la commande
 
         ```console
-        md2pdf -t @THEME@ nom-du-fichier.md
+        md2pdf -t sif nom-du-fichier.md
         ```
 
 
@@ -81,7 +81,7 @@ toc: true
     - pas de constructions complexes (solution : utiliser \LaTeX{}/Beamer directement)
     - pas d'utilisation simple de caractères unicode exotique
     - difficile à débugger sans maîtriser la chaîne `pandoc`/`pdflatex`
-        - passer par \LaTeX{} peut aider (`md2pdf -L`)
+        - passer par \LaTeX{} via peut aider (`md2pdf -L`)
 
 
 # Une courte référence

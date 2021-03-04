@@ -1,21 +1,19 @@
-MODELES := exemple-bbb-cours.tex
-MODELES += exemple-ulille-cours.tex exemple-lille1-cours.tex
-MODELES += exemple-gate-cours.tex exemple-lyon2-cours.tex exemple-lyon2gate-cours.tex
-MODELES += exemple-sif-cours.tex
+COURS := bbb ulille lille1 gate lyon2 lyon2gate sif
+SIMPLE := bbb yvan ulille sif
+OPTIONS := bbb ulille sif
+PRESENTATION := bbb ulille lille1 gate lyon2 lyon2gate sif
+DIAPORAMA := lille1 ulille lyon2 sif
 
-MODELES += exemple-bbb-simple.tex exemple-yvan-simple.tex
-MODELES += exemple-ulille-simple.tex
-MODELES += exemple-sif-simple.tex
+# POSIX shell for all for ERE
+SED := sed $(shell sed v </dev/null >/dev/null 2>&1 && echo " --posix") -E
 
-MODELES += exemple-bbb-options.tex
-MODELES += exemple-sif-options.tex
+EXEMPLES := $(patsubst %,exemple-%-cours.tex,$(COURS))
+EXEMPLES += $(patsubst %,exemple-%-simple.tex,$(SIMPLE))
+EXEMPLES += $(patsubst %,exemple-%-options.tex,$(OPTIONS))
+EXEMPLES += $(patsubst %,exemple-%-presentation.tex,$(PRESENTATION))
+EXEMPLES += $(patsubst %,exemple-%-diaporama.md,$(DIAPORAMA))
 
-MODELES += exemple-bbb-presentation.tex
-MODELES += exemple-ulille-presentation.tex exemple-lille1-presentation.tex
-MODELES += exemple-gate-presentation.tex exemple-lyon2-presentation.tex exemple-lyon2gate-presentation.tex
-MODELES += exemple-sif-presentation.tex
-
-PDF := $(addsuffix .pdf,$(basename $(MODELES))) modele-diaporama.pdf
+PDF := $(addsuffix .pdf,$(basename $(EXEMPLES)))
 
 IMG-SVG := $(wildcard img/*.svg)
 IMG-PDF := $(addsuffix .pdf,$(basename $(IMG-SVG)))
@@ -47,7 +45,13 @@ img/%.png: img/%.svg
 
 %.pdf: %.md $(IMG-PDF) $(IMG-PNG)
 	$(QUOI)
-	bin/md2beamer $^ img
+	$(MD2PDF) $<
+
+MD2PDF := bin/md2pdf
+define TMP =
+exemple-THEME-diaporama.pdf: MD2PDF += -t THEME
+endef
+$(foreach T,$(DIAPORAMA),$(eval $(subst THEME,$(T),$(TMP))))
 
 exemple-%-cours.tex: modele-cours.tex dist/%/*.tex 0*.tex etc/beamertheme%.sty
 	$(QUOI)
@@ -65,13 +69,17 @@ exemple-%-options.tex: modele-options.tex dist/%/*.tex etc/beamertheme%.sty
 	$(QUOI)
 	bin/include -p "% include " -I dist/$* $< > $@
 
+exemple-%-diaporama.md: modele-diaporama.md etc/beamertheme%.sty
+	$(QUOI)
+	$(SED) 's/@THEME@/$*/g' $< >$@
+
 ##############################################################################
 
 .PHONY: check clean dist reset
 
-modeles: $(MODELES)             ## construit les modèles (version source)
+exemples: $(EXEMPLES)           ## construit les exemples sources
 
-build: $(PDF)                   ## construit les modèles (version PDF)
+build: $(PDF)                   ## construit les exemples pdf
 
 images: $(IMG-PDF) $(IMG-PNG)   ## génère les images PDF et PNG à partir des SVG
 
@@ -84,5 +92,5 @@ clean:                          ## supprimer les fichiers inutiles
 	-rm -f *.aux *.bbl *.blg *.toc *.lof *.log *.lot *.flg *.out *.nav *.snm *.vrb *.bak *.synctex.gz
 
 reset: clean                    ## supprimer les fichiers regénérables
-	-rm -f $(IMG-PDF) $(IMG-PNG) $(MODELES) $(PDF)
+	-rm -f $(IMG-PDF) $(IMG-PNG) $(EXEMPLES) $(PDF)
 
