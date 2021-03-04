@@ -32,31 +32,32 @@ Pour ceux qui connaissent [LaTeX](http://www.latex-project.org) et sa classe
 
 Pour les *débutants* pour bien utiliser ces modèles il est recommandé de lire
 d'abord un des fichiers d'abord
-[modele-cours-lyon2.pdf](modele-cours-lyon2.pdf) puis de le relire une seconde
+[exemple-lyon2-cours.pdf](exemple-lyon2-cours.pdf) puis de le relire une seconde
 fois en comparant avec le contenu des fichiers sources
-[modele-cours-lyon2.tex](modele-cours-lyon2.tex).
+[exemple-lyon2-cours.tex](exemple-lyon2-cours.tex).
 
 La même chose est faisable pour les 2 autres thèmes :
 
 - pour `lyon2gate` via
-  [modele-cours-lyon2gate.pdf](modele-cours-lyon2gate.pdf) et
-  [modele-cours-lyon2gate.tex](modele-cours-lyon2gate.tex) ;
-- pour `gate` via [modele-cours-gate.pdf](modele-cours-gate.pdf) et
-  [modele-cours-gate.tex](modele-cours-gate.tex).
+  [exemple-lyon2gate-cours.pdf](exemple-lyon2gate-cours.pdf) et
+  [exemple-lyon2gate-cours.tex](exemple-lyon2gate-cours.tex) ;
+- pour `gate` via [exemple-gate-cours.pdf](exemple-gate-cours.pdf) et
+  [exemple-gate-cours.tex](exemple-gate-cours.tex).
 
 Il y a aussi des exemples pour des présentations plutôt que des cours chacun
 des thèmes :
 
-- `gate` via [modele-presentation-gate.pdf](modele-presentation-gate.pdf) et
-  [modele-presentation-gate.tex](modele-presentation-gate.tex),
-- `lyon2` via [modele-presentation-lyon2.pdf](modele-presentation-lyon2.pdf)
-  et [modele-presentation-lyon2.tex](modele-presentation-lyon2.tex),
+- `gate` via [exemple-gate-presentation.pdf](exemple-gate-presentation.pdf) et
+  [exemple-gate-presentation.tex](exemple-gate-presentation.tex),
+- `lyon2` via [exemple-lyon2-presentation.pdf](exemple-lyon2-presentation.pdf)
+  et [exemple-lyon2-presentation.tex](exemple-lyon2-presentation.tex),
 - `lyon2gate` via
-  [modele-presentation-lyon2gate.pdf](modele-presentation-lyon2gate.pdf) et
-  [modele-presentation-lyon2gate.tex](modele-presentation-lyon2gate.tex).
+  [exemple-lyon2gate-presentation.pdf](exemple-lyon2gate-presentation.pdf) et
+  [exemple-lyon2gate-presentation.tex](exemple-lyon2gate-presentation.tex).
 
-Pour ceux qui ont des besoins encore plus rapide et léger (présentations très
-simples), le script [md2beamer](bin/md2beamer) permet de transformer un
-fichier Markdown en diaporama PDF grâce à Beamer. Un exemple *explicatif* est
-disponible dans [modele-diaporama.md](modele-diaporama.md), avec un rendu dans
-[modele-diaporama.pdf](modele-diaporama.pdf).
+Pour ceux qui ont des besoins encore plus rapide et léger
+(présentations très simples), le script [md2beamer](bin/md2beamer)
+permet de transformer un fichier Markdown en diaporama PDF grâce à
+Beamer. Un exemple *explicatif* est disponible dans
+[exemple-lyon2-diaporama.md](exemple-lyon2-diaporama.md), avec un
+rendu dans [exemple-lyon2-diaporama.pdf](exemple-lyon2-diaporama.pdf).

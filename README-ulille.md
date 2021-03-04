@@ -20,16 +20,18 @@ logo vectoriel de l'Université de Lille
 [`logo-univ-lille.pdf`](img/logo-univ-lille.pdf).
 
 Pour les *débutants* pour bien utiliser ces modèles il est recommandé de lire
-d'abord [modele-cours-ulille.pdf](modele-cours-ulille.pdf) puis de le relire
+d'abord [exemple-ulille-cours.pdf](exemple-ulille-cours.pdf) puis de le relire
 une seconde fois en comparant avec le contenu du fichier source
-[modele-cours-ulille.tex](modele-cours-ulille.tex).
+[exemple-ulille-cours.tex](exemple-ulille-cours.tex).
 
 La même chose peut-être faite avec
-[modele-presentation-ulille.pdf](modele-presentation-ulille.pdf) et
-[modele-presentation-ulille.tex](modele-presentation-ulille.tex).
+[exemple-ulille-presentation.pdf](exemple-ulille-presentation.pdf) et
+[exemple-ulille-presentation.tex](exemple-ulille-presentation.tex).
 
-Pour ceux qui ont des besoins encore plus rapide et léger (présentations très
-simples), le script [md2beamer](bin/md2beamer) permet de transformer un
-fichier Markdown en diaporama PDF grâce à beamer. Un exemple *explicatif* est
-disponible dans [modele-diaporama.md](modele-diaporama.md), avec un rendu dans
-[modele-diaporama.pdf](modele-diaporama.pdf).
+Pour ceux qui ont des besoins encore plus rapide et léger
+(présentations très simples), le script [md2beamer](bin/md2beamer)
+permet de transformer un fichier Markdown en diaporama PDF grâce à
+beamer. Un exemple *explicatif* est disponible dans
+[exemple-ulille-diaporama.md](exemple-ulille-diaporama.md), avec un
+rendu dans
+[exemple-ulille-diaporama.pdf](exemple-ulille-diaporama.pdf).

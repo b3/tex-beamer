@@ -18,15 +18,15 @@ le thème Beamer [`beamerthemelille1.sty`](etc/beamerthemelille1.sty)
 [`logo-univ-lille1.pdf`](img/logo-univ-lille1.pdf).
 
 Pour les *débutants* pour bien utiliser ces modèles il est recommandé de lire
-d'abord [modele-cours-lille1.pdf](modele-cours-lille1.pdf) puis de le relire
+d'abord [exemple-lille1-cours.pdf](exemple-lille1-cours.pdf) puis de le relire
 une seconde fois en comparant avec le contenu du fichier source
-[modele-cours-lille1.tex](modele-cours-lille1.tex).
+[exemple-lille1-cours.tex](exemple-lille1-cours.tex).
 
 La même chose peut-être faite avec
-[modele-presentation-lille1.pdf](modele-presentation-lille1.pdf) et
-[modele-presentation-lille1.tex](modele-presentation-lille1.tex).
+[exemple-lille1-presentation.pdf](exemple-lille1-presentation.pdf) et
+[exemple-lille1-presentation.tex](exemple-lille1-presentation.tex).
 
 Pour ceux qui ont des besoins encore plus rapide et léger (présentations très
 simples), le script [md2beamer](bin/md2beamer) permet de transformer un
 fichier Markdown en diaporama PDF grâce à beamer. Un exemple *explicatif* est
-disponible dans [modele-diaporama.md](modele-diaporama.md).
+disponible dans [exemple-lille1-diaporama.md](exemple-lille1-diaporama.md).
