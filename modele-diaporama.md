@@ -1,6 +1,6 @@
 ---
 title: Préparer une présentation simplement
-subtitle: md2beamer (aka `md2pdf -p`)
+subtitle: `md2pdf`
 author:
 - "**Bruno BEAUFILS**"
 - John MAC FARLANE
@@ -34,7 +34,7 @@ toc: true
         ```
 
 
-# Faire une présentation avec `md2beamer`
+# Faire une présentation avec `md2pdf`
 
 ## Introduction
 

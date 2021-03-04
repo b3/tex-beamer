@@ -26,7 +26,8 @@ La même chose peut-être faite avec
 [exemple-lille1-presentation.pdf](exemple-lille1-presentation.pdf) et
 [exemple-lille1-presentation.tex](exemple-lille1-presentation.tex).
 
-Pour ceux qui ont des besoins encore plus rapide et léger (présentations très
-simples), le script [md2beamer](bin/md2beamer) permet de transformer un
-fichier Markdown en diaporama PDF grâce à beamer. Un exemple *explicatif* est
-disponible dans [exemple-lille1-diaporama.md](exemple-lille1-diaporama.md).
+Pour ceux qui ont des besoins encore plus rapide et léger
+(présentations très simples), le script [md2pdf](bin/md2pdf) permet de
+transformer un fichier Markdown en diaporama PDF grâce à beamer. Un
+exemple *explicatif* est disponible dans
+[exemple-lille1-diaporama.md](exemple-lille1-diaporama.md).

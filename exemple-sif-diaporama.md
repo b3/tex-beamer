@@ -1,6 +1,6 @@
 ---
 title: Préparer une présentation simplement
-subtitle: md2beamer (aka `md2pdf -p`)
+subtitle: `md2pdf`
 author:
 - "**Bruno BEAUFILS**"
 - John MAC FARLANE
@@ -34,7 +34,7 @@ toc: true
         ```
 
 
-# Faire une présentation avec `md2beamer`
+# Faire une présentation avec `md2pdf`
 
 ## Introduction
 
@@ -81,7 +81,7 @@ toc: true
     - pas de constructions complexes (solution : utiliser \LaTeX{}/Beamer directement)
     - pas d'utilisation simple de caractères unicode exotique
     - difficile à débugger sans maîtriser la chaîne `pandoc`/`pdflatex`
-        - passer par \LaTeX{} via peut aider (`md2pdf -L`)
+        - passer par \LaTeX{} peut aider (`md2pdf -L`)
 
 
 # Une courte référence

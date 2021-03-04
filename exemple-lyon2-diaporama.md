@@ -1,6 +1,6 @@
 ---
 title: Préparer une présentation simplement
-subtitle: md2beamer (aka `md2pdf -p`)
+subtitle: `md2pdf`
 author:
 - "**Bruno BEAUFILS**"
 - John MAC FARLANE
@@ -25,7 +25,8 @@ toc: true
 - Elle peut constituer un *modèle* pour faire d'autre présentations :
     1. créer un nouveau dossier
     2. y copier, renommer puis **modifier** le fichier `exemple-lyon2-diaporama.md`
-        - copier également les images (dossier `img`) si nécessaire
+        - copier également le thème (`etc/beamerthemelyon2.sty`)
+        - copier également les images nécessaire (voir dossier `img`)
     3. créer la présentation via la commande
 
         ```console
@@ -33,7 +34,7 @@ toc: true
         ```
 
 
-# Faire une présentation avec `md2beamer`
+# Faire une présentation avec `md2pdf`
 
 ## Introduction
 
@@ -80,7 +81,7 @@ toc: true
     - pas de constructions complexes (solution : utiliser \LaTeX{}/Beamer directement)
     - pas d'utilisation simple de caractères unicode exotique
     - difficile à débugger sans maîtriser la chaîne `pandoc`/`pdflatex`
-        - passer par \LaTeX{} via peut aider (`md2pdf -L`)
+        - passer par \LaTeX{} peut aider (`md2pdf -L`)
 
 
 # Une courte référence

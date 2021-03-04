@@ -80,8 +80,8 @@ titre :
 
 Pour ceux qui ne connaissent pas LaTeX (et ne veulent pas l'apprendre)
 ou ont des besoins encore plus rapide et léger, le script
-[md2beamer](bin/md2beamer) permet de transformer un fichier Markdown
-en diaporama PDF grâce à Beamer et [pandoc](https://pandoc.org) de
+[md2pdf](bin/md2pdf) permet de transformer un fichier Markdown en
+diaporama PDF grâce à Beamer et [pandoc](https://pandoc.org) de
 manière quasi transparente. Un exemple *explicatif* est disponible
 dans [exemple-sif-diaporama.md](exemple-sif-diaporama.md), avec un
 rendu dans [exemple-sif-diaporama.pdf](exemple-sif-diaporama.pdf).
