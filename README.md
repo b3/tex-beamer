@@ -8,6 +8,7 @@ confectionné :
   - [lille1](README-lille1.md)
   - [lyon2](README-lyon2-gate.md)
   - [lyon2gate](README-lyon2-gate.md)
+  - [sif](README-sif.md)
   - [ulille](README-ulille.md)
   - yvan
 
