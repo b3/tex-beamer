@@ -2,13 +2,28 @@
 % Copyright (C) 2015-2019 Bruno BEAUFILS
 % This file is distributed under the terms of the WTFPL license.
 
-\def\filedate{2021/01/26}
+\def\filedate{2021/03/04}
 
 % Paramétrages génériques %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% Les couleurs de Lyon 2
+%%% https://www.univ-lyon2.fr/universite/identite-visuelle-charte-graphique-et-logo
 \definecolor{Lyon2Rouge}{HTML}{e84242}
 \definecolor{Lyon2Noir}{HTML}{000000}
+\definecolor{Lyon2ASSP}{HTML}{ef7926}
+\definecolor{Lyon2Droit}{HTML}{c21633}
+\definecolor{Lyon2Langues}{HTML}{2291d0}
+\definecolor{Lyon2LeSLA}{HTML}{df1d84}
+\definecolor{Lyon2SES}{HTML}{ef7926}
+\definecolor{Lyon2TT}{HTML}{af4d97}
+\definecolor{Lyon2ICom}{HTML}{bccf21}
+\definecolor{Lyon2IET}{HTML}{8966a9}
+\definecolor{Lyon2IFS}{HTML}{63ba8b}
+\definecolor{Lyon2Psychologie}{HTML}{1dbadf}
+\definecolor{Lyon2ISPEF}{HTML}{7bbb58}
+\definecolor{Lyon2IUT}{HTML}{009bb9}
+\definecolor{Lyon2CIEF}{HTML}{7a2182}
+\definecolor{Lyon2SUAPS}{HTML}{e84242}
 
 %% Des "jolies" polices de caractères
 \usepackage{lmodern}            % pour sf et tt
@@ -22,7 +37,7 @@
 \hypersetup{%
   colorlinks,%
   linkcolor=,%
-  urlcolor=Lyon2Rouge}
+  urlcolor=blue}
   
 % Paramétrage Beamer %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -73,9 +88,11 @@
 \setbeamercolor{frametitle}{fg=white,bg=Lyon2Rouge}
 \setbeamercolor{title}{fg=white,bg=Lyon2Rouge}
 \setbeamercolor{subtitle}{fg=Lyon2Noir,bg=Lyon2Rouge}
-\setbeamercolor{footline}{bg=Lyon2Rouge,fg=white}
-\setbeamercolor{block title}{bg=Lyon2Rouge,fg=white}
-\setbeamercolor{block body}{bg=white,fg=Lyon2Noir}
+\setbeamercolor{footline}{fg=white,bg=Lyon2Rouge}
+\setbeamercolor{block title}{fg=white,bg=Lyon2Rouge}
+\setbeamercolor{block body}{fg=Lyon2Noir,bg=white}
+\setbeamercolor{block title example}{fg=white,bg=Lyon2ICom}
+\setbeamercolor{block body example}{fg=Lyon2Noir}
 \setbeamercolor{alerted text}{fg=Lyon2Rouge}
 
 %% Polices de caractères
