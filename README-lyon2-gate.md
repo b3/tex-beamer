@@ -15,7 +15,7 @@ préparer des présentations.
 L'objet est de faciliter la production de support de présentation
 (*Powerpoint* en novlangue) avec un rendu simple mais spécifique.
 
-Pour ceu@qx qui connaissent [LaTeX](http://www.latex-project.org) et sa classe
+Pour ceux qui connaissent [LaTeX](http://www.latex-project.org) et sa classe
 [Beamer](https://github.com/josephwright/beamer), les fichiers importants sont :
 
 - pour l'identité du GATE :
