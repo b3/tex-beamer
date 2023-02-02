@@ -20,7 +20,7 @@
 #     -r, --report             produit un rapport
 #     -t, --theme THEME        utilise THEME (au lieu de `ulille`) comme
 #                              personnalisation. THEME vide ou égal à `list`
-#                              affiche ceux embarqués dans le script.
+#                              affiche ceux embarqués dans le script
 #     -d, --demo [DIR]         produit des fichiers exemples dans `.` (ou DIR)
 #     -L, --latex              produit le source LaTeX (au lieu du résultat PDF)
 #     -P, --pandoc-extra ARGS  ajoute ARGS à la ligne de commande pandoc
@@ -75,10 +75,11 @@
 # # DEPENDANCES
 #
 #     Pour fonctionner md2pdf a besoin que [pandoc] ainsi qu'une
-#     installation TeX (avec `pdflatex` et la classe `beamer.cls`)
-#     soit accessible. Seule la distribution [TeXLive] disponible pour
-#     Unix et Windows (sous le nom [MacTeX] pour Mac OS X) a été
-#     testée.
+#     installation TeX (avec `pdflatex`, la classe `beamer.cls`, le
+#     support du français, des polices communes, la librairie Python
+#     [pygments]) soit accessible. Seule la distribution [TeXLive]
+#     disponible pour Unix et Windows (sous le nom [MacTeX] pour Mac
+#     OS X) a été testée.
 #
 #     Par ailleurs il a besoin de filtres POSIX standards (`cut`,
 #     `grep`, `sed`, `tr`) mais également des commandes `base64`,
@@ -87,16 +88,20 @@
 #     [pandoc]: http://pandoc.org
 #     [TeXLive]: http://tug.org/texlive
 #     [MacTeX]: http://tug.org/mactex
+#     [pygments]: https://pygments.org/
 #     [make]: https://www.gnu.org/software/make
 #
 #     Sur une distribution Debian stable (aka `buster` aujourd'hui)
-#     ceci correspond aux paquets :
+#     ceci correspond à l'installation des paquets :
 #
 #     - coreutils
 #     - make
 #     - pandoc
-#     - texlive-latex-base
-#     - texlive-latex-recommanded
+#     - texlive-latex-recommended (donc texlive-latex-base)
+#     - texlive-lang-french
+#     - texlive-fonts-extra
+#     - cm-super-minimal
+#     - python-pygments
 #
 # # DETAILS D'IMPLEMENTATION
 #
@@ -119,7 +124,7 @@
 #
 #     - [include-files]
 #     - [include-code-files]
-#     - center-image
+#     - center
 #     - svg-image-to-pdf
 #
 #     [lua]: https://pandoc.org/lua-filters.html
@@ -182,7 +187,7 @@
 # précautionneux avec les options de commandes Unix classiques qui sont
 # souvent différentes. Dans l'idéal il faudrait penser POSIX.
 
-VERSION=2.1.2021-03-04-1
+VERSION=2.1.2021-05-09-1
 
 _CMD=$(realpath $0)
 
@@ -227,14 +232,39 @@ extract_files ()
     done
 }
 
+# préviens de l'absence ou la non validité d'un outil
+need ()
+{
+    echo "${0##*/}: error: $1" 1>&2
+    ready=false
+    test -z "$2" || debian="$debian $2"
+}
+
 ##############################################################################
 
-_mute which make || _die "make: unavailable"
-_mute which pandoc || _die "pandoc: unavailable"
-_mute which base64 || _die "base64: unavailable"
-_mute which pdflatex || _die "pdflatex: unavailable"
-_mute kpsewhich beamer.cls || _die "beamer.cls: unavailable"
 
+# vérification présence et validité des outils nécessaires
+ready=true
+debian=
+_mute which base64 || need "base64: unavailable" coreutils
+_mute which make || need "make: unavailable" make
+if ! _mute which pandoc ; then
+    need "pandoc: unavailable" pandoc
+else
+    test $(pandoc -v | head -1 | cut -d ' ' -f2 | cut -d . -f1) -ge 2 || need "pandoc: version too old"
+fi
+_mute which pdflatex || need "pdflatex: unavailable" texlive-latex-base
+_mute kpsewhich beamer.cls || need "beamer.cls: unavailable" texlive-latex-recommended
+_mute kpsewhich french.sty || need "french.sty: unavailable" texlive-lang-french
+_mute kpsewhich fourier.sty || need "fourier.sty: unavailable" texlive-fonts-extra
+_mute kpsewhich type1ec.sty || need "type1ec.sty: unavailable" cm-super-minimal
+_mute which pygmentize || need "pygmentize: unavailable" python-pygments
+if ! $ready ; then
+    test -z "$debian" || echo "${0##*/}: error: under debian buster install these packages:$debian" 1>&2
+    exit 1
+fi
+
+# variables par défaut
 TYPE=beamer
 [ ${0##*/} = "md2beamer" ] && TYPE=beamer
 [ ${0##*/} = "md2report" ] && TYPE=report
@@ -270,6 +300,10 @@ do
             mkdir -p "${2:-.}"/img
             mv "${2:-.}"/*.pdf "${2:-.}"/img
             exit 0
+            ;;
+        "--debian")
+            check
+            exit
             ;;
         "-L"|"--latex") _ext=.tex ;;
         "-P"|"--pandoc-extra")
@@ -315,7 +349,7 @@ exit 0
 # begin-all makefile-pandoc 
 .PHONY: clean reset
 
-CONFDIR ?= $(dir $(MAKEFILE_LIST))etc
+CONFDIR ?= $(dir $(MAKEFILE_LIST))
 
 beamer: $(FILE)
 beamer: TEMPLATE ?= $(CONFDIR)/pandoc-beamer.tex
@@ -335,13 +369,15 @@ report: ARGS += --toc
 ARGS = --standalone
 ARGS += --template=$(TEMPLATE)
 ARGS += --pdf-engine-opt=-shell-escape
-ARGS += -L $(CONFDIR)/include-files.lua
-ARGS += -L $(CONFDIR)/include-code-files.lua
-ARGS += -L $(CONFDIR)/center-image.lua
-ARGS += -L $(CONFDIR)/svg-image-to-pdf.lua
-ARGS += -V theme=$(THEME)
-ARGS += -V themeoptions=$(THEMEOPTIONS)
 ARGS += --highlight-style=tango
+ARGS += --lua-filter $(CONFDIR)/include-files.lua
+ARGS += --lua-filter $(CONFDIR)/include-code-files.lua
+ARGS += --lua-filter $(CONFDIR)/center.lua
+ARGS += --lua-filter $(CONFDIR)/svg-image-to-pdf.lua
+ARGS += -V theme=$(THEME)
+ifdef THEMEOPTIONS
+ARGS += -V themeoptions=$(THEMEOPTIONS)
+endif
 
 %.pdf %.tex: %.md $(MAKEFILE_LIST) $(wildcard $(CONFDIR)/*)
 	TEXINPUTS=.//:$(CONFDIR): pandoc $(ARGS) $(EXTRAS) -o $@ -- $<
@@ -522,8 +558,8 @@ return {
 
 ##############################################################################
 
-# begin-all center-image.lua 
---- center-image.lua – filter to center image on their line
+# begin-all center.lua 
+--- center.lua – filter to center image on their line and div content
 ---
 --- ideas from https://pandoc.org/lua-filters.html#center-images-in-latex-and-html-output
 --- TODO : automatize that for images alone on a line (without the need to add a final backslash)
@@ -540,8 +576,19 @@ if FORMAT:match 'latex' or FORMAT:match 'beamer' then
       return elem
     end
   end
+  function Div (elem)
+    if elem.classes:includes("center", 1) then
+      return {
+        pandoc.RawBlock('latex', '\\begin{center}'),
+        elem,
+        pandoc.RawBlock('latex', '\\end{center}')
+      }
+    else
+      return elem
+    end
+  end
 end
-# end center-image.lua
+# end center.lua
 
 ##############################################################################
 
@@ -559,7 +606,7 @@ end
 ##############################################################################
 
 # begin-all pandoc-beamer.tex 
-\documentclass[10pt,t]{beamer}
+\documentclass[t,$if(fontsize)$$fontsize$$else$10pt$endif$$if(aspectratio)$,aspectratio=$aspectratio$$endif$$if(classoption)$,$for(classoption)$$classoption$$sep$,$endfor$$endif$]{beamer}
 
 % Paquets LaTeX %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -625,7 +672,7 @@ $endif$
 
 % Paramétrages Beamer %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-$if(theme)$\usetheme[$for(themeoptions)$$themeoptions$$sep$,$endfor$]{$theme$}$endif$
+$if(theme)$\usetheme$if(themeoptions)$[$for(themeoptions)$$themeoptions$$sep$,$endfor$]$endif${$theme$}$endif$
 $if(titlebackground)$
 \makeatletter
 \@ifundefined{titlebackground}
@@ -697,7 +744,7 @@ $body$
 ##############################################################################
 
 # begin-all pandoc-report.tex 
-\documentclass[10pt,twoside,openright]{report}
+\documentclass[$if(fontsize)$$fontsize$$else$10pt,$endif$twoside,openright$if(classoption)$,$for(classoption)$$classoption$$sep$,$endfor$$endif$]{report}
 
 % Paquets LaTeX %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -1473,6 +1520,23 @@ Il peut être inclus depuis un fichier
 ``` {include="md2pdf-exemple-code" .bash .numberLines}
 ```
 
+## Centrage
+
+::: {.center}
+Les divisions sont des blocs entourés par `:::`.
+
+Elles peuvent être centrées en leur attribuant la classe `center`.
+
+Elles peuvent contenir plusieurs paragraphes ou autres élements.
+
+| **Outil**  | **Utilité**                     |
+|------------|---------------------------------|
+| `pandoc`   | conversion de formats           |
+| `pdflatex` | composition de \LaTeX{} en PDF  |
+| `beamer`   | jeux de balisage \LaTeX{} pour  |
+:::
+
+
 ## Spécificité pour les présentations
 
 **Listes**
@@ -1483,17 +1547,22 @@ Il peut être inclus depuis un fichier
 
 **Affichage incrémental**
 
-> - affichage incrémental
->
->     - pause via un paragraphe avec une ligne de trois points
->
->             . . .
->
->     - des items de listes dans des blocs de citations
->
->             > -
->
-> - ne pas trop en abuser !
+::: {.incremental}
+- affichage incrémental
+
+     - pause via un paragraphe avec une ligne de trois points
+
+             . . .
+
+     - des items de listes dans des blocs avec la classe `incremental`
+
+             ::: {.incremental}
+             - un
+             - deux
+             :::
+
+ - ne pas trop en abuser !
+:::
 
 
 ## Réglages `pandoc` utilisés par `md2pdf -p`
@@ -1806,8 +1875,8 @@ ajoutant un blanc protégé juste avant ou juste après elles),
 elles sont placées exactement à l'endroit choisi sans être considérées
 comme des figures. C'est le cas de la *TeX Friendly Zone* ci dessous.
 
-Grâce au filtre `center-image.lua` (activé par défaut par `md2pdf`),
-si elles ont la classe `.center`, elles sont, en plus, centrées sur la
+Grâce au filtre `center.lua` (activé par défaut par `md2pdf`), si
+elles ont la classe `.center`, elles sont, en plus, centrées sur la
 largeur de la page.
 
 ![TeX Friendly Zone](img/tex-friendly-zone.pdf){ width=30% .center }\ 
@@ -1853,6 +1922,28 @@ Ce qui donne le résultat suivant.
 
 ``` {include="md2pdf-exemple-code" .bash .numberLines}
 ```
+
+
+## Alignement
+
+Grâce au filtre `center.lua` (activé par défaut par `md2pdf`), si des
+zones de texte sont déclarées comme des divisions et qu'elles ont la
+classe `.center`, alors elles sont centrées.
+
+Par exemple le code suivant définit une division et lui attribue la classe `center`.
+
+```markdown
+::: {.center}
+Une zone qui doit être centrée
+:::
+```
+
+Ce qui donne le résultat suivant.
+
+::: {.center}
+Une zone qui doit être centrée
+:::
+
 
 ## Tableaux
 
