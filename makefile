@@ -46,11 +46,12 @@ doc:							## affiche la documentation
 
 img/%.pdf: img/%.svg
 	$(QUOI)
-	inkscape -d 2400 -o $@ -T $<
+	rsvg-convert -a -f pdf -o $@ $<
+#	inkscape -d 2400 -o $@ -T $<
 
 img/%.png: img/%.svg
 	$(QUOI)
-	inkscape -d 72 -o $@ -T $<
+	inkscape -d 72 -o $@ -T $< 2>/dev/null
 
 %.pdf: %.tex $(IMG-PDF) $(IMG-PNG)
 	$(QUOI)
@@ -100,6 +101,7 @@ images: $(IMG-PDF) $(IMG-PNG)   ## génère les images PDF et PNG à partir des 
 check:                          ## vérifier la présence des outils nécessaires
 	@which pdflatex
 	@which inkscape
+	@which rsvg-convert
 
 clean:                          ## supprimer les fichiers inutiles
 	-rm -f $(shell find . -name "*~")
