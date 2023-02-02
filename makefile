@@ -1,18 +1,18 @@
 # Variables :
-#     THEME     définit le thème à générer
+#     THEMES     définit le(s) thème(s) à générer
 
-ifndef THEME
+ifndef THEMES
 COURS := bbb ulille lille1 gate lyon2 lyon2gate sif
 SIMPLE := bbb yvan ulille sif
 OPTIONS := bbb ulille sif
 PRESENTATION := bbb ulille lille1 gate lyon2 lyon2gate sif
 DIAPORAMA := lille1 ulille lyon2 sif
 else
-COURS := $(THEME)
-SIMPLE := $(THEME)
-OPTIONS := $(THEME)
-PRESENTATION := $(THEME)
-DIAPORAMA := $(THEME)
+COURS := $(THEMES)
+SIMPLE := $(THEMES)
+OPTIONS := $(THEMES)
+PRESENTATION := $(THEMES)
+DIAPORAMA := $(THEMES)
 endif
 
 # POSIX shell for all for ERE
