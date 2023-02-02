@@ -1,3 +1,6 @@
+# Variables :
+#     THEME     définit le thème à générer
+
 ifndef THEME
 COURS := bbb ulille lille1 gate lyon2 lyon2gate sif
 SIMPLE := bbb yvan ulille sif
@@ -35,6 +38,9 @@ QUOI = @printf "\nFABRICATION de $@ à partir de $<\n"
 
 help:                           ## liste les cibles disponibles
 	@eval $$($(SED) -n '/^[a-zA-Z0-9_-]+:/ s/^(.*):([^#]*)(## |)(.*)$$/printf "\\033[36m%-15s\\033[0m %s\\n" "\1" "\4";/ ; ta; b; :a p' $(MAKEFILE_LIST))
+
+doc:							## affiche la documentation
+	@$(SED) -n '1,/^$$/ { s/^ *#// ; s/^ //g ; p }' $(MAKEFILE_LIST) | $(SED) '$$d'
 
 ##############################################################################
 
@@ -101,4 +107,3 @@ clean:                          ## supprimer les fichiers inutiles
 
 reset: clean                    ## supprimer les fichiers regénérables
 	-rm -f $(IMG-PDF) $(IMG-PNG) $(EXEMPLES) $(PDF)
-
