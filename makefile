@@ -1,8 +1,16 @@
+ifndef THEME
 COURS := bbb ulille lille1 gate lyon2 lyon2gate sif
 SIMPLE := bbb yvan ulille sif
 OPTIONS := bbb ulille sif
 PRESENTATION := bbb ulille lille1 gate lyon2 lyon2gate sif
 DIAPORAMA := lille1 ulille lyon2 sif
+else
+COURS := $(THEME)
+SIMPLE := $(THEME)
+OPTIONS := $(THEME)
+PRESENTATION := $(THEME)
+DIAPORAMA := $(THEME)
+endif
 
 # POSIX shell for all for ERE
 SED := sed $(shell sed v </dev/null >/dev/null 2>&1 && echo " --posix") -E
