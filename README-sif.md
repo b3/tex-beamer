@@ -23,8 +23,8 @@ classe [Beamer](https://github.com/josephwright/beamer), les fichiers
 importants sont :
 
 - le thème [`beamerthemesif.sty`](etc/beamerthemesif.sty),
-- le logo vectoriel de la SIF [`logo-sif.pdf`](img/logo-sif.pdf) ;
-- le bandeau de la SIF [`bandeau-sif.pdf`](img/bandeau-sif.pdf).
+- le logo vectoriel horizontal de la SIF [`logo-sif-2022-horizontal.pdf`](img/logo-sif-2022-horizontal.pdf) (page de titre) ;
+- le logo vectoriel vertical de la SIF [`logo-sif-2022-vertical.pdf`](img/logo-sif-2022-vertical.pdf) (diapos) ;
 
 Pour les *débutants* pour bien utiliser ces modèles il est recommandé
 de lire le fichier [exemple-sif-cours.pdf](exemple-sif-cours.pdf) puis
