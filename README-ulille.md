@@ -1,3 +1,19 @@
+# Avertissement
+
+L'Université a *encore* changé d'identité graphique en 2022. C'est la
+[sixième fois depuis
+2020](https://www.lifl.fr/~beaufils/pub/ulille). À ce jour ça fait en
+moyenne une fois tous les 4 ans.
+
+**Je n'ai pas encore eu le temps de mettre à jour ma version des styles
+présents ici.**
+
+Si vous êtes pressés [Pierre
+BOULET](https://pro.univ-lille.fr/pierre-boulet) en a fait une version
+disponible en ligne :
+<https://gitlab.univ-lille.fr/pierre.boulet/ulille-latex/>
+
+
 # Modèles de présentations pour l'Université de Lille
 
 Des fichiers présents ici s'adressent aux personnes qui veulent des
